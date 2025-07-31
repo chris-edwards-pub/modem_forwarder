@@ -79,7 +79,12 @@ def wait_for_connect(ser):
                     ser.flush()
                 except Exception as e:
                     print(f"[ERROR] sending greeting to modem: {e}")
-                # Wait for 'C' or 'c' from modem
+                # Flush input buffer to ignore any previous input
+                if hasattr(ser, 'reset_input_buffer'):
+                    ser.reset_input_buffer()
+                else:
+                    # Fallback for pyserial <3.0
+                    ser.flushInput()
                 print("[INFO] Waiting for 'C' from modem to continue...")
                 while True:
                     if ser.in_waiting:
