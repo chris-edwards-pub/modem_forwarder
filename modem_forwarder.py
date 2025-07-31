@@ -88,8 +88,6 @@ def wait_for_connect(ser):
                     if ch.upper() == b'C':
                         print("[INFO] 'C' received, continuing to bridge session.")
                         break
-                    else:
-                        modem_print(ser, "Please press 'C' to continue.")
                 return
         time.sleep(0.05)
 
