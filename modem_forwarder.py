@@ -9,7 +9,7 @@ import sys
 MODEM_PORT = "/dev/ttyUSB0"
 BAUDRATE = 2400
 TELNET_HOST = "bbs.c64.pub"
-TELNET_PORT = 64
+TELNET_PORT = 23
 
 # Tunables
 MODEM_READ_CHUNK = 1          # responsive
