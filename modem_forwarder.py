@@ -83,6 +83,9 @@ def wait_for_connect(ser):
                 else:
                     ser.flushInput()
                 time.sleep(0.1)  # Let any noise settle
+                # Drain any remaining characters in the buffer
+                while ser.in_waiting:
+                    _ = ser.read(ser.in_waiting)
                 print("[INFO] Waiting for 'C' from modem to continue...")
                 modem_print(ser, "Hit 'C' to connect.")
                 while True:
