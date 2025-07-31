@@ -1,4 +1,3 @@
-DEBUG_MODEM = True
 #!/usr/bin/env python3
 
 import serial
@@ -17,6 +16,7 @@ MODEM_READ_CHUNK = 1          # responsive
 BBS_READ_CHUNK = 1024
 SERIAL_TIMEOUT = 0            # non-blocking
 HANGUP_READ_TIMEOUT = 0.5     # wait for OK/NO CARRIER after hangup
+DEBUG_MODEM = False
 
 def force_hangup(ser):
     """
@@ -154,7 +154,8 @@ def bridge_session(ser):
                         print(f"[ERROR] reading modem: {e}")
                         data = b""
                     if data:
-                        print(f"[Modem→Telnet] {len(data)} bytes →: {data[:80]!r}")
+                        if DEBUG_MODEM:
+                            print(f"[DEBUG] Modem→Telnet: {len(data)} bytes →: {data[:80]!r}")
                         try:
                             sock.sendall(data)
                         except Exception as e:
