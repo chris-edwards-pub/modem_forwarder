@@ -74,23 +74,14 @@ def wait_for_connect(ser):
                 print("[INFO] CONNECT detected!")
                 try:
                     modem_print(ser, "Hello World")
-                    modem_print(ser, "Hit 'C' to connect.")
                 except Exception as e:
                     print(f"[ERROR] sending greeting to modem: {e}")
-                # Flush input buffer to ignore any previous input
-                if hasattr(ser, 'reset_input_buffer'):
-                    ser.reset_input_buffer()
-                else:
-                    # Fallback for pyserial <3.0
-                    ser.flushInput()
                 print("[INFO] Waiting for 'C' from modem to continue...")
                 while True:
-                    if ser.in_waiting:
-                        ch = ser.read(1)
-                        if ch.upper() == b'C':
-                            print("[INFO] 'C' received, continuing to bridge session.")
-                            break
-                    time.sleep(0.05)
+                    response = modem_input(ser, "Hit 'C' to connect.")
+                    if response.strip().upper() == 'C':
+                        print("[INFO] 'C' received, continuing to bridge session.")
+                        break
                 return
         time.sleep(0.05)
 
@@ -169,6 +160,32 @@ def modem_print(ser, text):
         text = text + "\r\n"
     ser.write(text.encode(errors="replace"))
     ser.flush()
+
+
+def modem_input(ser, prompt=None):
+    """
+    Optionally send a prompt, then read and return a line of input from the modem (ending with CR or LF, line ending stripped).
+    """
+    # Flush input buffer to ignore any previous input
+    if hasattr(ser, 'reset_input_buffer'):
+        ser.reset_input_buffer()
+    else:
+        ser.flushInput()
+    if prompt:
+        modem_print(ser, prompt)
+    buf = b""
+    while True:
+        if ser.in_waiting:
+            ch = ser.read(1)
+            if ch in (b'\r', b'\n'):
+                if buf:
+                    break
+                else:
+                    continue  # ignore leading newlines
+            buf += ch
+        else:
+            time.sleep(0.05)
+    return buf.decode(errors="replace")
 
 
 def main_loop():
