@@ -170,7 +170,8 @@ def bridge_session(ser):
                         print(f"[ERROR] reading bbs: {e}")
                         data = b""
                     if data:
-                        print(f"[Telnet→Modem] {len(data)} bytes ←: {data[:80]!r}")
+                        if DEBUG_MODEM:
+                            print(f"[DEBUG] Telnet→Modem: {len(data)} bytes ←: {data[:80]!r}")
                         try:
                             ser.write(data)
                             ser.flush()
