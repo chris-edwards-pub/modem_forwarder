@@ -173,9 +173,9 @@ def bridge_session(ser):
                         try:
                             ser.write(data)
                             ser.flush()
-                            # Simulate output speed for current baud rate
-                            bytes_per_sec = BAUDRATE / 10.0
-                            time.sleep(len(data) / bytes_per_sec)
+                            # # Simulate output speed for current baud rate
+                            # bytes_per_sec = BAUDRATE / 10.0
+                            # time.sleep(len(data) / bytes_per_sec)
                         except Exception as e:
                             print(f"[ERROR] write to modem failed: {e}")
                             return
