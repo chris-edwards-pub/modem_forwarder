@@ -1,3 +1,4 @@
+DEBUG_MODEM = True
 #!/usr/bin/env python3
 
 import serial
@@ -26,17 +27,25 @@ def force_hangup(ser):
     try:
         # Hard drop via DTR toggle
         ser.dtr = False
+        if DEBUG_MODEM:
+            print("[DEBUG] DTR set to False")
         time.sleep(1)
         ser.dtr = True
+        if DEBUG_MODEM:
+            print("[DEBUG] DTR set to True")
         time.sleep(0.5)
 
         # Guard time before escape
         time.sleep(0.5)
+        if DEBUG_MODEM:
+            print(f"[DEBUG] Writing to modem: b'+++'")
         ser.write(b"+++")
         ser.flush()
         time.sleep(1)
 
         # Hang up
+        if DEBUG_MODEM:
+            print(f"[DEBUG] Writing to modem: b'ATH\\r'")
         ser.write(b"ATH\r")
         ser.flush()
 
@@ -44,9 +53,15 @@ def force_hangup(ser):
         deadline = time.time() + 5.0
         resp = ""
         while time.time() < deadline:
-            if ser.in_waiting:
-                chunk = ser.read(ser.in_waiting).decode(errors="ignore")
-                resp += chunk
+            waiting = ser.in_waiting
+            if waiting:
+                if DEBUG_MODEM:
+                    print(f"[DEBUG] Reading {waiting} bytes from modem during hangup wait")
+                chunk = ser.read(waiting)
+                if DEBUG_MODEM:
+                    print(f"[DEBUG] Read bytes: {chunk!r}")
+                chunk_decoded = chunk.decode(errors="ignore")
+                resp += chunk_decoded
                 if "OK" in resp.upper() or "NO CARRIER" in resp.upper():
                     print(f"[INFO] Hangup response: {resp.strip()!r}")
                     return
@@ -67,10 +82,16 @@ def wait_for_connect(ser):
     print("[INFO] Waiting for incoming call...")
     buffer = ""
     while True:
-        if ser.in_waiting:
-            data = ser.read(ser.in_waiting).decode(errors="ignore")
-            print(f"Modem says: {data.strip()}")
-            buffer += data.upper()
+        waiting = ser.in_waiting
+        if waiting:
+            if DEBUG_MODEM:
+                print(f"[DEBUG] Reading {waiting} bytes from modem during connect wait")
+            data = ser.read(waiting)
+            if DEBUG_MODEM:
+                print(f"[DEBUG] Read bytes: {data!r}")
+            data_decoded = data.decode(errors="ignore")
+            print(f"Modem says: {data_decoded.strip()}")
+            buffer += data_decoded.upper()
             if "CONNECT" in buffer:
                 print("[INFO] CONNECT detected!")
                 try:
@@ -79,13 +100,20 @@ def wait_for_connect(ser):
                     print(f"[ERROR] sending greeting to modem: {e}")
                 # Flush input buffer to ignore any previous input (do this ONCE before prompting)
                 if hasattr(ser, 'reset_input_buffer'):
+                    if DEBUG_MODEM:
+                        print("[DEBUG] Flushing modem input buffer (reset_input_buffer)")
                     ser.reset_input_buffer()
                 else:
+                    if DEBUG_MODEM:
+                        print("[DEBUG] Flushing modem input buffer (flushInput)")
                     ser.flushInput()
                 time.sleep(0.1)  # Let any noise settle
                 # Drain any remaining characters in the buffer
                 while ser.in_waiting:
-                    _ = ser.read(ser.in_waiting)
+                    waiting = ser.in_waiting
+                    if DEBUG_MODEM:
+                        print(f"[DEBUG] Draining {waiting} bytes from modem input buffer")
+                    _ = ser.read(waiting)
                 print("[INFO] Waiting for 'C' from modem to continue...")
                 modem_print(ser, "Hit 'C' to connect.")
                 while True:
@@ -169,7 +197,10 @@ def modem_print(ser, text):
     """
     if not text.endswith("\r\n"):
         text = text + "\r\n"
-    ser.write(text.encode(errors="replace"))
+    btext = text.encode(errors="replace")
+    if DEBUG_MODEM:
+        print(f"[DEBUG] Writing to modem: {btext!r}")
+    ser.write(btext)
     ser.flush()
 
 
@@ -181,8 +212,13 @@ def modem_input(ser, prompt=None):
         modem_print(ser, prompt)
     buf = b""
     while True:
-        if ser.in_waiting:
+        waiting = ser.in_waiting
+        if waiting:
+            if DEBUG_MODEM:
+                print(f"[DEBUG] Reading {waiting} bytes from modem during modem_input")
             ch = ser.read(1)
+            if DEBUG_MODEM:
+                print(f"[DEBUG] Read byte: {ch!r}")
             if ch in (b'\r', b'\n'):
                 if buf:
                     break
@@ -201,8 +237,13 @@ def modem_getch(ser, prompt=None):
     if prompt:
         modem_print(ser, prompt)
     while True:
-        if ser.in_waiting:
+        waiting = ser.in_waiting
+        if waiting:
+            if DEBUG_MODEM:
+                print(f"[DEBUG] Reading {waiting} bytes from modem during modem_getch")
             ch = ser.read(1)
+            if DEBUG_MODEM:
+                print(f"[DEBUG] Read byte: {ch!r}")
             return ch
         time.sleep(0.05)
 
