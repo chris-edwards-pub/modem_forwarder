@@ -72,6 +72,21 @@ def wait_for_connect(ser):
             buffer += data.upper()
             if "CONNECT" in buffer:
                 print("[INFO] CONNECT detected!")
+                try:
+                    ser.write(b"Hello World\r\n")
+                    ser.flush()
+                    ser.write(b"Hit any key to connect.\r\n")
+                    ser.flush()
+                except Exception as e:
+                    print(f"[ERROR] sending greeting to modem: {e}")
+                # Wait for any key from modem
+                print("[INFO] Waiting for any key from modem to continue...")
+                while True:
+                    if ser.in_waiting:
+                        _ = ser.read(1)  # Read one byte (any key)
+                        print("[INFO] Key received, continuing to bridge session.")
+                        break
+                    time.sleep(0.05)
                 return
         time.sleep(0.05)
 
