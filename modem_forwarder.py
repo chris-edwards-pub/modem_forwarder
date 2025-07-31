@@ -40,17 +40,18 @@ def force_hangup(ser):
         ser.write(b"ATH\r")
         ser.flush()
 
-        # Wait for acknowledgement
-        deadline = time.time() + HANGUP_READ_TIMEOUT
+        # Wait for acknowledgement, up to 5 seconds
+        deadline = time.time() + 5.0
         resp = ""
         while time.time() < deadline:
             if ser.in_waiting:
                 chunk = ser.read(ser.in_waiting).decode(errors="ignore")
                 resp += chunk
                 if "OK" in resp.upper() or "NO CARRIER" in resp.upper():
-                    break
+                    print(f"[INFO] Hangup response: {resp.strip()!r}")
+                    return
             time.sleep(0.05)
-        print(f"[INFO] Hangup response: {resp.strip()!r}")
+        print(f"[WARN] Hangup timeout, last response: {resp.strip()!r}")
     except Exception as e:
         print(f"[ERROR] force_hangup exception: {e}")
 
