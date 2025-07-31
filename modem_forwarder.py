@@ -82,9 +82,10 @@ def wait_for_connect(ser):
                 else:
                     ser.flushInput()
                 print("[INFO] Waiting for 'C' from modem to continue...")
+                # Print the prompt ONCE and wait for a single key
                 while True:
-                    response = modem_input(ser, "Hit 'C' to connect.")
-                    if response.strip().upper() == 'C':
+                    ch = modem_getch(ser, "Hit 'C' to connect.")
+                    if ch.upper() == b'C':
                         print("[INFO] 'C' received, continuing to bridge session.")
                         break
                 return
@@ -186,6 +187,19 @@ def modem_input(ser, prompt=None):
         else:
             time.sleep(0.05)
     return buf.decode(errors="replace")
+
+
+def modem_getch(ser, prompt=None):
+    """
+    Optionally send a prompt, then wait for and return a single character from the modem (no Enter required).
+    """
+    if prompt:
+        modem_print(ser, prompt)
+    while True:
+        if ser.in_waiting:
+            ch = ser.read(1)
+            return ch
+        time.sleep(0.05)
 
 
 def main_loop():
