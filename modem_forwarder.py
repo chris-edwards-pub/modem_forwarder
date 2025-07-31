@@ -76,6 +76,11 @@ def wait_for_connect(ser):
                     modem_print(ser, "Hello World")
                 except Exception as e:
                     print(f"[ERROR] sending greeting to modem: {e}")
+                # Flush input buffer to ignore any previous input (do this ONCE before prompting)
+                if hasattr(ser, 'reset_input_buffer'):
+                    ser.reset_input_buffer()
+                else:
+                    ser.flushInput()
                 print("[INFO] Waiting for 'C' from modem to continue...")
                 while True:
                     response = modem_input(ser, "Hit 'C' to connect.")
@@ -166,11 +171,6 @@ def modem_input(ser, prompt=None):
     """
     Optionally send a prompt, then read and return a line of input from the modem (ending with CR or LF, line ending stripped).
     """
-    # Flush input buffer to ignore any previous input
-    if hasattr(ser, 'reset_input_buffer'):
-        ser.reset_input_buffer()
-    else:
-        ser.flushInput()
     if prompt:
         modem_print(ser, prompt)
     buf = b""
