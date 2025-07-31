@@ -73,10 +73,8 @@ def wait_for_connect(ser):
             if "CONNECT" in buffer:
                 print("[INFO] CONNECT detected!")
                 try:
-                    ser.write(b"Hello World\r\n")
-                    ser.flush()
-                    ser.write(b"Hit 'C' to connect.\r\n")
-                    ser.flush()
+                    modem_print(ser, "Hello World")
+                    modem_print(ser, "Hit 'C' to connect.")
                 except Exception as e:
                     print(f"[ERROR] sending greeting to modem: {e}")
                 # Flush input buffer to ignore any previous input
@@ -161,6 +159,17 @@ def bridge_session(ser):
         sock.close()
         print("[INFO] Bridge loop exited, forcing hangup.")
         force_hangup(ser)
+
+
+def modem_print(ser, text):
+    """
+    Send a string to the modem, appending CRLF, and flush.
+    """
+    if not text.endswith("\r\n"):
+        text = text + "\r\n"
+    ser.write(text.encode(errors="replace"))
+    ser.flush()
+
 
 def main_loop():
     while True:
