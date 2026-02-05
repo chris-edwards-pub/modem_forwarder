@@ -25,7 +25,7 @@ bbs_entries:
     port: 64
     auto_login: null
 
-  - name: "The C64 Pub (ANSI)"
+  - name: "The C64 Pub (ANSI/ASCII)"
     description: "Retro computing BBS "
     host: "bbs.c64.pub"
     port: 23
