@@ -16,7 +16,7 @@ from modem_forwarder.config import load_config
 from modem_forwarder.logging_config import setup_logging
 from modem_forwarder.menu import display_menu, get_selection
 from modem_forwarder.modem import force_hangup, init_modem, modem_print, wait_for_connect
-from modem_forwarder.terminal import get_terminal_type
+from modem_forwarder.terminal import get_terminal_type, safe_print
 
 logger = logging.getLogger(__name__)
 
@@ -81,7 +81,7 @@ def main_loop(config_path: str = "config.yaml") -> None:
 
                 if selected_bbs is None:
                     # User chose to hang up
-                    modem_print(ser, "Goodbye!", debug=gc.debug_modem)
+                    safe_print(ser, "Goodbye!", term_type, debug=gc.debug_modem)
                     force_hangup(ser, debug=gc.debug_modem)
                     continue
 
