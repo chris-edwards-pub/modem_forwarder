@@ -55,11 +55,6 @@ def main_loop(config_path: str = "config.yaml") -> None:
                 # Wait for incoming call
                 connect_string = wait_for_connect(ser, debug=gc.debug_modem)
 
-                # Show connection info to caller immediately
-                if connect_string:
-                    modem_print(ser, "", debug=gc.debug_modem)
-                    modem_print(ser, connect_string, debug=gc.debug_modem)
-
                 # Detect or prompt for terminal type
                 term_type = get_terminal_type(ser, debug=gc.debug_modem)
                 logger.info(f"Terminal type: {term_type.value}")
