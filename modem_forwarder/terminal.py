@@ -152,12 +152,31 @@ def get_terminal_type(ser: serial.Serial, timeout: float = 2.0, debug: bool = Fa
     return prompt_terminal_type(ser, debug=debug)
 
 
+def ascii_to_petscii(text: str) -> str:
+    """
+    Convert ASCII text to PETSCII-compatible encoding.
+
+    PETSCII has inverted case mapping compared to ASCII:
+    - ASCII uppercase (A-Z) displays as lowercase on C64
+    - ASCII lowercase (a-z) displays as UPPERCASE on C64
+
+    This function swaps case so text displays correctly on C64.
+
+    Args:
+        text: ASCII text to convert.
+
+    Returns:
+        Text with case swapped for PETSCII display.
+    """
+    return text.swapcase()
+
+
 def safe_print(ser: serial.Serial, text: str, term_type: TerminalType, debug: bool = False) -> None:
     """
     Output text in a charset-safe manner for the terminal type.
 
-    For now, uses plain text which is safe across all terminal types.
-    Future enhancement: could add terminal-specific formatting.
+    For PETSCII terminals, swaps case so text displays correctly on C64.
+    For other terminals, sends text as-is.
 
     Args:
         ser: Serial port object.
@@ -165,6 +184,7 @@ def safe_print(ser: serial.Serial, text: str, term_type: TerminalType, debug: bo
         term_type: Target terminal type.
         debug: Enable debug logging.
     """
-    # Plain text is safe for all terminal types
-    # CRLF line endings work universally
+    if term_type == TerminalType.PETSCII:
+        text = ascii_to_petscii(text)
+
     modem_print(ser, text, debug=debug)

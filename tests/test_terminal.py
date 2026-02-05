@@ -9,6 +9,7 @@ from modem_forwarder.terminal import (
     prompt_terminal_type,
     get_terminal_type,
     safe_print,
+    ascii_to_petscii,
     ANSI_CURSOR_POSITION_REQUEST,
 )
 
@@ -124,6 +125,30 @@ class TestGetTerminalType:
         mock_prompt.assert_called_once()
 
 
+class TestAsciiToPetscii:
+    """Tests for PETSCII conversion."""
+
+    def test_ascii_to_petscii_swaps_case(self):
+        """Test that case is swapped for PETSCII."""
+        assert ascii_to_petscii("Hello World") == "hELLO wORLD"
+
+    def test_ascii_to_petscii_uppercase(self):
+        """Test uppercase becomes lowercase."""
+        assert ascii_to_petscii("ABC") == "abc"
+
+    def test_ascii_to_petscii_lowercase(self):
+        """Test lowercase becomes uppercase."""
+        assert ascii_to_petscii("xyz") == "XYZ"
+
+    def test_ascii_to_petscii_numbers_unchanged(self):
+        """Test numbers are not affected."""
+        assert ascii_to_petscii("123") == "123"
+
+    def test_ascii_to_petscii_mixed(self):
+        """Test mixed content."""
+        assert ascii_to_petscii("BBS Menu 1.") == "bbs mENU 1."
+
+
 class TestSafePrint:
     """Tests for safe_print function."""
 
@@ -134,3 +159,20 @@ class TestSafePrint:
         mock_serial.write.assert_called()
         call_args = mock_serial.write.call_args[0][0]
         assert call_args.endswith(b"\r\n")
+
+    def test_safe_print_petscii_swaps_case(self, mock_serial):
+        """Test that PETSCII output has case swapped."""
+        safe_print(mock_serial, "Hello", TerminalType.PETSCII)
+
+        mock_serial.write.assert_called()
+        call_args = mock_serial.write.call_args[0][0]
+        # Should be "hELLO" with CRLF
+        assert b"hELLO" in call_args
+
+    def test_safe_print_ascii_no_swap(self, mock_serial):
+        """Test that ASCII output is unchanged."""
+        safe_print(mock_serial, "Hello", TerminalType.ASCII)
+
+        mock_serial.write.assert_called()
+        call_args = mock_serial.write.call_args[0][0]
+        assert b"Hello" in call_args
