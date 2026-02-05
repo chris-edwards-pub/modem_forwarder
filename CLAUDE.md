@@ -130,6 +130,38 @@ pytest tests/ --cov=modem_forwarder
 
 ### Adding New BBSes
 Simply add entries to `bbs_entries` in `config.yaml`. No code changes required.
+Pull BBS list from https://syncterm.bbsdev.net/syncterm.lst
 
 ### Debugging
 Set `debug_modem: true` and `log_level: "DEBUG"` in config for verbose logging.
+
+## Git Workflow
+
+### Branching Strategy (GitHub Flow)
+
+- **master** is the main branch and should always be in a deployable state
+- Create feature branches from master for all changes:
+  - `feature/<name>` - New features
+  - `fix/<name>` - Bug fixes
+  - `docs/<name>` - Documentation updates
+- Open a Pull Request for review before merging
+- Merge to master when ready, then delete the feature branch
+
+### Versioning (Semantic Versioning)
+
+Follow [Semantic Versioning](https://semver.org/) format: `MAJOR.MINOR.PATCH`
+
+| Change Type | Version Bump | Example |
+|-------------|--------------|---------|
+| Breaking changes | MAJOR | 1.0.0 → 2.0.0 |
+| New features (backward compatible) | MINOR | 2.0.0 → 2.1.0 |
+| Bug fixes (backward compatible) | PATCH | 2.1.0 → 2.1.1 |
+
+### Release Process
+
+1. Create a feature branch for the release prep
+2. Update version number in relevant files
+3. Update CHANGELOG (if applicable)
+4. Merge to master
+5. Tag the release: `git tag -a v2.1.0 -m "Release v2.1.0"`
+6. Push tags: `git push origin --tags`
