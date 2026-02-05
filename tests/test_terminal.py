@@ -87,17 +87,6 @@ class TestPromptTerminalType:
 
         assert result == TerminalType.ASCII
 
-    def test_prompt_vt100(self, mock_serial):
-        """Test selecting VT100 terminal."""
-        mock_serial.in_waiting = 1
-        type(mock_serial).in_waiting = property(lambda self: 1)
-        mock_serial.read.return_value = b"4"
-
-        result = prompt_terminal_type(mock_serial)
-
-        assert result == TerminalType.VT100
-
-
 class TestGetTerminalType:
     """Tests for get_terminal_type function."""
 

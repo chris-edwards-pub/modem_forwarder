@@ -138,16 +138,15 @@ def prompt_terminal_type(ser: serial.Serial, debug: bool = False) -> TerminalTyp
     modem_print(ser, "1. PETSCII (Commodore)", debug=debug)
     modem_print(ser, "2. ANSI", debug=debug)
     modem_print(ser, "3. ASCII (plain text)", debug=debug)
-    modem_print(ser, "4. VT100", debug=debug)
     modem_print(ser, "", debug=debug)
 
     while True:
-        ch = modem_getch(ser, prompt="Enter choice (1-4): ", debug=debug)
+        ch = modem_getch(ser, prompt="Enter choice (1-3): ", debug=debug)
 
         try:
             choice = int(ch.decode(errors="ignore"))
         except (ValueError, UnicodeDecodeError):
-            modem_print(ser, "Invalid input. Please enter 1-4.", debug=debug)
+            modem_print(ser, "Invalid input. Please enter 1-3.", debug=debug)
             continue
 
         if choice == 1:
@@ -159,11 +158,8 @@ def prompt_terminal_type(ser: serial.Serial, debug: bool = False) -> TerminalTyp
         elif choice == 3:
             logger.info("User selected ASCII terminal")
             return TerminalType.ASCII
-        elif choice == 4:
-            logger.info("User selected VT100 terminal")
-            return TerminalType.VT100
         else:
-            modem_print(ser, "Please enter 1, 2, 3, or 4.", debug=debug)
+            modem_print(ser, "Please enter 1, 2, or 3.", debug=debug)
 
 
 def get_terminal_type(ser: serial.Serial, timeout: float = 2.0, debug: bool = False) -> TerminalType:
