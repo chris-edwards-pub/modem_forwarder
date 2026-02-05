@@ -166,7 +166,7 @@ def init_modem(ser: serial.Serial, init_sequence: Optional[List[str]] = None, de
         time.sleep(1)
 
 
-def wait_for_connect(ser: serial.Serial, debug: bool = False) -> bool:
+def wait_for_connect(ser: serial.Serial, debug: bool = False) -> str:
     """
     Wait for an incoming call and CONNECT response from the modem.
 
@@ -175,10 +175,11 @@ def wait_for_connect(ser: serial.Serial, debug: bool = False) -> bool:
         debug: Enable debug logging.
 
     Returns:
-        True when CONNECT is detected.
+        The CONNECT string from the modem (e.g., "CONNECT 9600/ARQ/V42").
     """
     logger.info("Waiting for incoming call...")
     buffer = ""
+    raw_buffer = ""  # Preserve original case for display
     while True:
         waiting = ser.in_waiting
         if waiting:
@@ -189,9 +190,16 @@ def wait_for_connect(ser: serial.Serial, debug: bool = False) -> bool:
                 logger.debug(f"Read bytes: {data!r}")
             data_decoded = data.decode(errors="ignore")
             logger.info(f"Modem says: {data_decoded.strip()}")
+            raw_buffer += data_decoded
             buffer += data_decoded.upper()
             if "CONNECT" in buffer:
-                logger.info("CONNECT detected!")
+                # Extract the CONNECT line from raw buffer
+                connect_string = ""
+                for line in raw_buffer.split('\n'):
+                    if "CONNECT" in line.upper():
+                        connect_string = line.strip()
+                        break
+                logger.info(f"CONNECT detected: {connect_string}")
                 # Flush input buffer
                 if hasattr(ser, 'reset_input_buffer'):
                     if debug:
@@ -208,7 +216,7 @@ def wait_for_connect(ser: serial.Serial, debug: bool = False) -> bool:
                     if debug:
                         logger.debug(f"Draining {remaining} bytes from modem input buffer")
                     ser.read(remaining)
-                return True
+                return connect_string
         time.sleep(0.05)
 
 

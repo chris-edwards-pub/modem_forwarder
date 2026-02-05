@@ -16,7 +16,7 @@ from modem_forwarder.config import load_config
 from modem_forwarder.logging_config import setup_logging
 from modem_forwarder.menu import display_menu, get_selection
 from modem_forwarder.modem import force_hangup, init_modem, modem_print, wait_for_connect
-from modem_forwarder.terminal import get_terminal_type
+from modem_forwarder.terminal import get_terminal_type, safe_print
 
 logger = logging.getLogger(__name__)
 
@@ -53,11 +53,16 @@ def main_loop(config_path: str = "config.yaml") -> None:
                 init_modem(ser, init_sequence=gc.init_sequence, debug=gc.debug_modem)
 
                 # Wait for incoming call
-                wait_for_connect(ser, debug=gc.debug_modem)
+                connect_string = wait_for_connect(ser, debug=gc.debug_modem)
 
                 # Detect or prompt for terminal type
                 term_type = get_terminal_type(ser, debug=gc.debug_modem)
                 logger.info(f"Terminal type: {term_type.value}")
+
+                # Show connection info to caller
+                if connect_string:
+                    safe_print(ser, "", term_type, debug=gc.debug_modem)
+                    safe_print(ser, connect_string, term_type, debug=gc.debug_modem)
 
                 # Show menu and get selection
                 display_menu(
