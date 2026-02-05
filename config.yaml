@@ -19,20 +19,15 @@ global:
     - "ATS0=1"
 
 bbs_entries:
-  - name: "C64 BBS"
-    description: "Commodore 64 public BBS"
+  - name: "The C64 Pub (PETSCII)"
+    description: "Retro computing BBS that all about the Commodore 64"
     host: "bbs.c64.pub"
     port: 64
     auto_login: null
 
-  - name: "Level 29"
-    description: "Retro computing BBS"
-    host: "bbs.level29.de"
+  - name: "The C64 Pub (ANSI)"
+    description: "Retro computing BBS "
+    host: "bbs.c64.pub"
     port: 23
     auto_login: null
 
-  - name: "Particles BBS"
-    description: "Another retro BBS"
-    host: "particlesbbs.dyndns.org"
-    port: 6400
-    auto_login: null

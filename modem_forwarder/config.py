@@ -31,7 +31,7 @@ class BBSEntry:
 class GlobalConfig:
     """Global configuration settings."""
     modem_port: str = "/dev/ttyUSB0"
-    default_baudrate: int = 9600
+    default_baudrate: int = 38400
     serial_timeout: float = 0
     modem_read_chunk: int = 1
     bbs_read_chunk: int = 1024
