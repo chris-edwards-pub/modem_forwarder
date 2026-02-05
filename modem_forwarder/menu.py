@@ -7,7 +7,7 @@ import serial
 
 from .config import BBSEntry
 from .modem import modem_getch
-from .terminal import TerminalType, safe_print
+from .terminal import TerminalType, safe_print, color_print, Color
 
 logger = logging.getLogger(__name__)
 
@@ -32,18 +32,18 @@ def display_menu(
     logger.info(f"Displaying menu with {len(bbs_entries)} BBS entries")
 
     safe_print(ser, "", term_type, debug=debug)
-    safe_print(ser, welcome_message, term_type, debug=debug)
+    color_print(ser, welcome_message, Color.CYAN, term_type, debug=debug)
     safe_print(ser, "", term_type, debug=debug)
-    safe_print(ser, "=== BBS Directory ===", term_type, debug=debug)
+    color_print(ser, "=== BBS Directory ===", Color.YELLOW, term_type, debug=debug)
     safe_print(ser, "", term_type, debug=debug)
 
     for i, bbs in enumerate(bbs_entries, start=1):
-        safe_print(ser, f"{i}. {bbs.name}", term_type, debug=debug)
+        color_print(ser, f"{i}. {bbs.name}", Color.GREEN, term_type, debug=debug)
         if bbs.description:
-            safe_print(ser, f"   {bbs.description}", term_type, debug=debug)
+            color_print(ser, f"   {bbs.description}", Color.WHITE, term_type, debug=debug)
 
     safe_print(ser, "", term_type, debug=debug)
-    safe_print(ser, "0. Hang up", term_type, debug=debug)
+    color_print(ser, "0. Hang up", Color.RED, term_type, debug=debug)
     safe_print(ser, "", term_type, debug=debug)
 
 
@@ -68,13 +68,13 @@ def get_selection(
     max_choice = len(bbs_entries)
 
     while True:
-        safe_print(ser, f"Enter choice (1-{max_choice}, 0 to hang up): ", term_type, debug=debug)
+        color_print(ser, f"Enter choice (1-{max_choice}, 0 to hang up): ", Color.CYAN, term_type, debug=debug)
         ch = modem_getch(ser, debug=debug)
 
         try:
             choice = int(ch.decode(errors="ignore"))
         except (ValueError, UnicodeDecodeError):
-            safe_print(ser, "Invalid input. Try again.", term_type, debug=debug)
+            color_print(ser, "Invalid input. Try again.", Color.RED, term_type, debug=debug)
             continue
 
         if choice == 0:
@@ -84,7 +84,7 @@ def get_selection(
         if 1 <= choice <= max_choice:
             selected = bbs_entries[choice - 1]
             logger.info(f"User selected BBS: {selected.name}")
-            safe_print(ser, f"Connecting to {selected.name}...", term_type, debug=debug)
+            color_print(ser, f"Connecting to {selected.name}...", Color.GREEN, term_type, debug=debug)
             return selected
 
-        safe_print(ser, f"Please enter 1-{max_choice} or 0.", term_type, debug=debug)
+        color_print(ser, f"Please enter 1-{max_choice} or 0.", Color.YELLOW, term_type, debug=debug)

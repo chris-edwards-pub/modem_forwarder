@@ -20,6 +20,43 @@ class TerminalType(Enum):
     VT100 = "vt100"
 
 
+class Color(Enum):
+    """Semantic color names for terminal output."""
+    RESET = "reset"
+    WHITE = "white"
+    RED = "red"
+    GREEN = "green"
+    BLUE = "blue"
+    YELLOW = "yellow"
+    CYAN = "cyan"
+    PURPLE = "purple"
+
+
+# ANSI/VT100 color escape codes
+ANSI_COLORS = {
+    Color.RESET: "\x1b[0m",
+    Color.WHITE: "\x1b[37m",
+    Color.RED: "\x1b[31m",
+    Color.GREEN: "\x1b[32m",
+    Color.BLUE: "\x1b[34m",
+    Color.YELLOW: "\x1b[33m",
+    Color.CYAN: "\x1b[36m",
+    Color.PURPLE: "\x1b[35m",
+}
+
+# PETSCII color control characters (accent/lowercase glyph region in $00-$1F, some $80-$9F)
+PETSCII_COLORS = {
+    Color.RESET: "\x05",      # CHR$(5) = white (reset to default)
+    Color.WHITE: "\x05",      # CHR$(5) = white
+    Color.RED: "\x1c",        # CHR$(28) = red
+    Color.GREEN: "\x1e",      # CHR$(30) = green
+    Color.BLUE: "\x1f",       # CHR$(31) = blue
+    Color.YELLOW: "\x9e",     # CHR$(158) = yellow
+    Color.CYAN: "\x9f",       # CHR$(159) = cyan
+    Color.PURPLE: "\x9c",     # CHR$(156) = purple
+}
+
+
 # ANSI escape sequence to request cursor position
 ANSI_CURSOR_POSITION_REQUEST = b"\x1b[6n"
 
@@ -171,6 +208,52 @@ def ascii_to_petscii(text: str) -> str:
     return text.swapcase()
 
 
+def get_color_code(color: Color, term_type: TerminalType) -> str:
+    """
+    Get the color escape/control code for a terminal type.
+
+    Args:
+        color: The color to get.
+        term_type: Target terminal type.
+
+    Returns:
+        Color code string, or empty string for ASCII (no color support).
+    """
+    if term_type == TerminalType.PETSCII:
+        return PETSCII_COLORS.get(color, "")
+    elif term_type in (TerminalType.ANSI, TerminalType.VT100):
+        return ANSI_COLORS.get(color, "")
+    else:
+        # ASCII has no color support
+        return ""
+
+
+def colorize(text: str, color: Color, term_type: TerminalType) -> str:
+    """
+    Wrap text with color codes for the terminal type.
+
+    Args:
+        text: Text to colorize.
+        color: Color to apply.
+        term_type: Target terminal type.
+
+    Returns:
+        Text with color codes prepended (and reset appended for ANSI).
+    """
+    if term_type == TerminalType.ASCII:
+        return text
+
+    color_code = get_color_code(color, term_type)
+    reset_code = get_color_code(Color.RESET, term_type)
+
+    if term_type in (TerminalType.ANSI, TerminalType.VT100):
+        # ANSI needs reset at end
+        return f"{color_code}{text}{reset_code}"
+    else:
+        # PETSCII color stays until changed
+        return f"{color_code}{text}"
+
+
 def safe_print(ser: serial.Serial, text: str, term_type: TerminalType, debug: bool = False) -> None:
     """
     Output text in a charset-safe manner for the terminal type.
@@ -188,3 +271,28 @@ def safe_print(ser: serial.Serial, text: str, term_type: TerminalType, debug: bo
         text = ascii_to_petscii(text)
 
     modem_print(ser, text, debug=debug)
+
+
+def color_print(
+    ser: serial.Serial,
+    text: str,
+    color: Color,
+    term_type: TerminalType,
+    debug: bool = False,
+) -> None:
+    """
+    Output colored text in a charset-safe manner for the terminal type.
+
+    Args:
+        ser: Serial port object.
+        text: Text to output.
+        color: Color to apply.
+        term_type: Target terminal type.
+        debug: Enable debug logging.
+    """
+    colored_text = colorize(text, color, term_type)
+
+    if term_type == TerminalType.PETSCII:
+        colored_text = get_color_code(color, term_type) + ascii_to_petscii(text)
+
+    modem_print(ser, colored_text, debug=debug)
