@@ -44,16 +44,17 @@ ANSI_COLORS = {
     Color.PURPLE: "\x1b[35m",
 }
 
-# PETSCII color control characters (accent/lowercase glyph region in $00-$1F, some $80-$9F)
-PETSCII_COLORS = {
-    Color.RESET: "\x05",      # CHR$(5) = white (reset to default)
-    Color.WHITE: "\x05",      # CHR$(5) = white
-    Color.RED: "\x1c",        # CHR$(28) = red
-    Color.GREEN: "\x1e",      # CHR$(30) = green
-    Color.BLUE: "\x1f",       # CHR$(31) = blue
-    Color.YELLOW: "\x9e",     # CHR$(158) = yellow
-    Color.CYAN: "\x9f",       # CHR$(159) = cyan
-    Color.PURPLE: "\x9c",     # CHR$(156) = purple
+# PETSCII color control characters - stored as bytes to avoid UTF-8 encoding issues
+# Values above 127 would be mangled by UTF-8 encoding (e.g., \x9f becomes \xc2\x9f)
+PETSCII_COLORS_BYTES = {
+    Color.RESET: b"\x05",      # CHR$(5) = white (reset to default)
+    Color.WHITE: b"\x05",      # CHR$(5) = white
+    Color.RED: b"\x1c",        # CHR$(28) = red
+    Color.GREEN: b"\x1e",      # CHR$(30) = green
+    Color.BLUE: b"\x1f",       # CHR$(31) = blue
+    Color.YELLOW: b"\x9e",     # CHR$(158) = yellow
+    Color.CYAN: b"\x9f",       # CHR$(159) = cyan
+    Color.PURPLE: b"\x9c",     # CHR$(156) = purple
 }
 
 
@@ -213,20 +214,32 @@ def get_color_code(color: Color, term_type: TerminalType) -> str:
         term_type: Target terminal type.
 
     Returns:
-        Color code string, or empty string for ASCII (no color support).
+        Color code string, or empty string for ASCII/PETSCII (no color support via string).
     """
-    if term_type == TerminalType.PETSCII:
-        return PETSCII_COLORS.get(color, "")
-    elif term_type in (TerminalType.ANSI, TerminalType.VT100):
+    if term_type in (TerminalType.ANSI, TerminalType.VT100):
         return ANSI_COLORS.get(color, "")
     else:
         # ASCII has no color support
+        # PETSCII uses bytes, not strings (handled separately)
         return ""
+
+
+def get_petscii_color_bytes(color: Color) -> bytes:
+    """
+    Get the PETSCII color control byte.
+
+    Args:
+        color: The color to get.
+
+    Returns:
+        Color control byte for PETSCII.
+    """
+    return PETSCII_COLORS_BYTES.get(color, b"")
 
 
 def colorize(text: str, color: Color, term_type: TerminalType) -> str:
     """
-    Wrap text with color codes for the terminal type.
+    Wrap text with color codes for the terminal type (ANSI/VT100 only).
 
     Args:
         text: Text to colorize.
@@ -236,18 +249,15 @@ def colorize(text: str, color: Color, term_type: TerminalType) -> str:
     Returns:
         Text with color codes prepended (and reset appended for ANSI).
     """
-    if term_type == TerminalType.ASCII:
+    if term_type == TerminalType.ASCII or term_type == TerminalType.PETSCII:
+        # ASCII has no colors, PETSCII handled separately with bytes
         return text
 
     color_code = get_color_code(color, term_type)
     reset_code = get_color_code(Color.RESET, term_type)
 
-    if term_type in (TerminalType.ANSI, TerminalType.VT100):
-        # ANSI needs reset at end
-        return f"{color_code}{text}{reset_code}"
-    else:
-        # PETSCII color stays until changed
-        return f"{color_code}{text}"
+    # ANSI needs reset at end
+    return f"{color_code}{text}{reset_code}"
 
 
 def safe_print(ser: serial.Serial, text: str, term_type: TerminalType, debug: bool = False) -> None:
@@ -286,9 +296,17 @@ def color_print(
         term_type: Target terminal type.
         debug: Enable debug logging.
     """
-    colored_text = colorize(text, color, term_type)
-
     if term_type == TerminalType.PETSCII:
-        colored_text = get_color_code(color, term_type) + ascii_to_petscii(text)
-
-    modem_print(ser, colored_text, debug=debug)
+        # PETSCII: Write color byte directly (avoids UTF-8 encoding issues)
+        color_bytes = get_petscii_color_bytes(color)
+        if color_bytes:
+            if debug:
+                logger.debug(f"Writing PETSCII color byte: {color_bytes!r}")
+            ser.write(color_bytes)
+            ser.flush()
+        # Then write the case-swapped text
+        modem_print(ser, ascii_to_petscii(text), debug=debug)
+    else:
+        # ANSI/VT100/ASCII: Use string-based colorization
+        colored_text = colorize(text, color, term_type)
+        modem_print(ser, colored_text, debug=debug)
