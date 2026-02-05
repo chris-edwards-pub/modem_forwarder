@@ -1,0 +1,38 @@
+# Modem Forwarder Configuration
+
+global:
+  modem_port: "/dev/ttyUSB0"
+  default_baudrate: 9600
+  serial_timeout: 0
+  modem_read_chunk: 1
+  bbs_read_chunk: 1024
+  hangup_read_timeout: 0.5
+  debug_modem: false
+  welcome_message: "Welcome to the BBS Gateway!"
+  log_file: "modem_forwarder.log"
+  log_level: "INFO"
+  init_sequence:
+    - "ATZ"
+    - "AT&D0"
+    - "AT&C0"
+    - "ATV1"
+    - "ATS0=1"
+
+bbs_entries:
+  - name: "C64 BBS"
+    description: "Commodore 64 public BBS"
+    host: "bbs.c64.pub"
+    port: 64
+    auto_login: null
+
+  - name: "Level 29"
+    description: "Retro computing BBS"
+    host: "bbs.level29.de"
+    port: 23
+    auto_login: null
+
+  - name: "Particles BBS"
+    description: "Another retro BBS"
+    host: "particlesbbs.dyndns.org"
+    port: 6400
+    auto_login: null
