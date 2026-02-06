@@ -7,7 +7,7 @@ from typing import Union
 import serial
 
 from .config import BBSEntry
-from .modem import modem_print, modem_input
+from .modem import modem_print, modem_input, modem_getch
 
 logger = logging.getLogger(__name__)
 
