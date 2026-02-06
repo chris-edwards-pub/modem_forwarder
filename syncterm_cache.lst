@@ -1,0 +1,1154 @@
+; Exported from Synchronix on Fri Feb 06 2026 03:03:56 GMT-0500 (EST)
+
+[The Pharcyde]
+	ConnectionType=telnet
+	Address=bbs.pharcyde.org
+	Port=23
+	Comment=Awesome ANSI stomping ground.
+
+[War Ensemble BBS]
+	ConnectionType=ssh
+	Address=warensemble.com
+	Port=22
+	Comment=What is dead may never die! War Ensemble BBS has loads of files, tons of messages and more DOOR GAMES than you can shake a stick at! Multiple Tradewars Games! LORD, PTEOS, Arrowbridge Exitilus, The Pit and more! Games added by request
+
+[The Gate BBS]
+	ConnectionType=telnet
+	Address=thegateb.synchro.net
+	Port=23
+	Comment=Online 24/7 since 1980 Huge message base Huge file transfer area Huge collection of Doors InterBBS Gaming
+
+[realitycheckBBS]
+	ConnectionType=ssh
+	Address=realitycheckBBS.org
+	Port=22
+	Comment=Your one-stop shop for retro culture, conspiracy theories, SLACK, fringe science and BAD INFORMATION.
+
+[Dock Sud BBS]
+	ConnectionType=ssh
+	Address=bbs.docksud.com.ar
+	Port=33
+	Comment=Todos Los Dias las 24Hs en Argentina Files - Chat - Fionet - Jueguitos y demas yerbas Avellaneda Buenos Aires Sino es el unico que queda, pega en el palo!!!
+
+[MS & RD BBs]
+	ConnectionType=telnet
+	Address=bbs.mozysswamp.org
+	Port=23
+	Comment=Mozy's Swamp And Red Dwarf BBs (MS&RD) MK IV The Old Mozy's Swamp BBs is back online The Old Red Dwarf BBs (Australian one) is back too with the old doors that had been used in the day all welcome EST 10/1993
+
+[Tardis BBS]
+	ConnectionType=telnet
+	Address=bbs.cortex-media.info
+	Port=23
+	Comment=Home of Quarkware BBS, the Ruby BBS.
+A BBS since 1985 (with a little downtime ).
+
+[RetroDigital BBS]
+	ConnectionType=telnet
+	Address=rdnetbbs.com
+	Port=23
+	Comment=Home of all things Retro Computing
+
+[Vertrauen]
+	ConnectionType=ssh
+	Address=vert.synchro.net
+	Port=22
+	Comment=Home of Synchronet Multinode BBS Software Co-founder of DOVE-Net, member of FidoNet
+
+[End Of The Line BBS]
+	ConnectionType=ssh
+	Address=endofthelinebbs.com
+	Port=22
+	Comment=End Of The Line BBS focusing on messaging with a few doors and text files. More coming soon.
+
+[AlcaBBS]
+	ConnectionType=telnet
+	Address=bbs.alcatrash.org
+	Port=23
+	Comment=A BBS with conections to Fidonet, Agoranet. Doors that are connected are Doorparty and BBSLink. also some local doors. Hosted in the Netherlands.
+
+[HispaMSX BBS]
+	ConnectionType=ssh
+	Address=bbs.hispamsx.org
+	Port=22
+	Comment=The 8-bit MSX home computer support BBS
+
+[The Dungeon]
+	ConnectionType=ssh
+	Address=dungeon.barnabasmusic.com
+	Port=22
+	Comment=The Dungeon BBS, originally run on a C64 in 1985 with 2 HUGE 7.5MB D9090 Hard Drives, has been  Around in one form or another ever since. We  Focus primarily on Commodore and Amiga Stuff But carry many Echo Areas Other Networks Too
+
+[Unicyber BBS]
+	ConnectionType=ssh
+	Address=bbs.unicyber.co.uk
+	Port=2424
+	Comment=Unicyber BBS This is the House of Unicyber BBS, started as an email service back in the 90's and rebuilt as a new concept. I hope you have a nice staying !!
+
+[The Realm of Serion]
+	ConnectionType=ssh
+	Address=connect.serionbbs.com
+	Port=2222
+	Comment=The Realm of Serion BBS is truly unique, featuring * Heavily customized, medieval environment * Custom ANSI and RIP graphics * Legend of the Red Dragon Tournament * Other curated doors and a friendly community
+
+[haxorz palace]
+	ConnectionType=telnet
+	Address=telnet.unknownrealm.org
+	Port=23
+	Comment=One of the longest-running Synchronet v3 boards very "scene" themed
+
+[SHODANs Core]
+	ConnectionType=ssh
+	Address=shodanscore.com
+	Port=22
+	Comment=The place for meat. Atari, Interactive Fiction and more.
+
+[Hard Drive Cafe]
+	ConnectionType=ssh
+	Address=hdcbbs.com
+	Port=22
+	Comment=Hard Drive Cafe BBS Is Back! Telnet BBS: hdcbbs.com:23 - DDial: hdcbbs.com 2300 Web - BBS - Messages - DDial Chat! Look out for more in the future! 
+
+[EchoBaseBBS]
+	ConnectionType=ssh
+	Address=www.eifelaktiv.de
+	Port=22
+	Comment=
+
+[The Horizon BBS]
+	ConnectionType=ssh
+	Address=bbs.horizonbbs.org
+	Port=22
+	Comment=The Horizon BBS - Online Since 1994 Many door games, vintage BBS file archives, Fidonet and more.
+
+[ALTERANT]
+	ConnectionType=telnet
+	Address=alterant.bbs.dege.au
+	Port=23
+	Comment=I'm working on bringing Viewdata/Videotex back to life...
+
+[Athelstan BBS]
+	ConnectionType=ssh
+	Address=athelstan.org
+	Port=2222
+	Comment=Athelstan running on Linux offering various native and dos doors.
+
+[CJ's Place]
+	ConnectionType=ssh
+	Address=cjsplace.thruhere.net
+	Port=22
+	Comment=BBS located in Orange City, FL. Offering multiple network echos, loads of games (including TWGS). Stop by and hang out, we're pretty relaxed around here. Interested in joining the IRC discussions on Synchronet? Check out our Web IRC client!
+
+[The Lost Chord BBS]
+	ConnectionType=ssh
+	Address=tlcbbs.synchro.net
+	Port=22
+	Comment=The Lost Chord BBS - located in Cheyenne, WY. Originally established in 1986 in Rome, NY. All computer types welcome.
+
+[Nite Eyes BBS]
+	ConnectionType=telnet
+	Address=bbs.lizardmaster.com
+	Port=23
+	Comment=A place for daily games like Solitaire, Pyramid Solitaire, Wordle, Yahtzee and more!
+
+[t0kerZ hUt]
+	ConnectionType=telnet
+	Address=t0kerz.ddns.net
+	Comment=A BBS for those who enjoy the finer (greener) things in life!  Pack a bowl and fire up some of our online games (BRE, SRE, FE, Global Wars, Galactic Warzone, The Pit, DoorMUD, VGA Planets, Lord, Lord2, etc) for a hard HIT of nostalgia!
+
+[JumpStart BBS]
+	ConnectionType=telnet
+	Address=exciter.ws
+	Port=23
+	Comment=Door games. Global War, BRE, Trade Wars (also port 2002), OOII
+
+[The Fool's Quarter]
+	ConnectionType=ssh
+	Address=fqbbs.synchro.net
+	Port=2022
+	Comment=Mainly a door game based BBS. http://bbs.foolsquarter.com Many of the old favorite door games online: BRE, SRE, FE, TAL, Esterian Conquest, Death Master JNS & Sunrise Collections, Hobbit Trivia and more!
+
+[The Wormhole II BBS]
+	ConnectionType=Telnet
+	Address=wh2.abon.us
+	Port=2321
+	Comment=The Wormhole II is a tribute to a Departed Sysop friend that embraced the helping of other sysops without the arrogance. We have some message networks and will have doorparty with all the door games you could want.
+
+[Halls of Valhalla]
+	ConnectionType=ssh
+	Address=hovalbbs.com
+	Port=2233
+	Comment=Messaging focused Synchronet BBS, featuring 17 networked message areas, email, and netmail. Doorparty, BBSLink, and Multi-Relay-Chat for games and live chat with dozens of linked BBS. Dine with the Gods, in the Halls of Valhalla.
+
+[Imzadi Box]
+	ConnectionType=ssh
+	Address=box.imzadi.de
+	Port=22
+	Comment=Small BBS that serves some CP/M software for RC2014 and compatible systems. Has also some door games and message networks :) FTN hub for WeedNet 
+
+[>>> Magnum BBS <<<]
+	ConnectionType=ssh
+	Address=magnumbbs.net
+	Comment=A UK BBS which was born on a Sinclair ZX Spectrum using a citizen band radio as a network/transfer medium, before being ported to the Atari ST & modem. Reborn in 2021 on UNIX with dial up options.
+
+[Digital Lethargia]
+	ConnectionType=ssh
+	Address=www.diglet.ca
+	Port=22
+	Comment=telnet/SSH BBS companion to the Digital Lethargia website (https://www.diglet.ca) Door games and DOVE-Net.
+
+[Mythical Kingdom SBBS]
+	ConnectionType=ssh
+	Address=bbs.mythicalkingdom.com
+	Port=22
+	Comment=Mythical Kingdom BBS
+
+[Path Unknown]
+	ConnectionType=ssh
+	Address=pathunknown.net
+	Port=2222
+	Comment=Tinker site, for the love of text communication ...summoning nostalgia for my bygone TAG BBS ...and door games!  
+
+[Whisky Lover's BBS]
+	ConnectionType=telnet
+	Address=wd1cks.org
+	Port=23
+	Comment=A BBS focusing on amateur radio in Ada, MI.
+
+[The X-BIT BBS]
+	ConnectionType=ssh
+	Address=x-bit.org
+	Port=22222
+	Comment=Massive amount of doors w/ many message nets, large file database, MRC & IRC live chat and fun ANSI displays w/ sci-fi/medieval/cyberpunk theam. Home of X-News rss feed, Global War Gate, KnK gate and The X-League (interbbs league 777).
+
+[Retroconnect.org]
+	ConnectionType=ssh
+	Address=retroconnect.org
+	Port=2222
+	Comment=Yet another glorified "off-line" mail reader... Mostly stock BBS hosted on Ubuntu in a VMware VM on an ancient Mac Pro.
+
+[Soft Solutions]
+	ConnectionType=ssh
+	Address=softsolutions.net.br
+	Port=22
+	Comment=Back from 1993 ! When it ran on a 386 using RA. /S 
+
+[The SouthEast Star]
+	ConnectionType=ssh
+	Address=sestar.synchro.net
+	Port=22
+	Comment=Formerly known as Waldo's Place USA, we are a top-tier Star-meshed Fidonet echomail hub & IFDC FileGate Project(sm) hub. Telnet/SSH/HTTPS UIs. Thanks Hurricane Florence (2018) for the push to set up this new system. Always a WIP ;)
+
+[Digital Distortion]
+	ConnectionType=ssh
+	Address=bbs.digitaldistortionbbs.com
+	Port=22
+	Comment=A customized BBS with games, message areas, and files (many of which are from the 90s when the BBS originally ran).
+
+[Fercho BBS]
+	ConnectionType=telnet
+	Address=ferchobbs.ddns.net
+	Port=2323
+	Comment=Abandonware - MSX - Developers - FileEcho    
+
+[Zenolab]
+	ConnectionType=ssh
+	Address=zenolab.synchro.net
+	Port=2299
+	Comment=Cloud based Linux BBS just for fun and kicks. Decent list of Doors (Both local and BBSLink) DoveNet, FidoNet, a few utils.  
+
+[Veleno BBS]
+	ConnectionType=ssh
+	Address=velenobbs.net
+	Port=22
+	Comment=A horror oriented BBS where for the first time ANSI screens are dynamic and no longer static like in old styles
+
+[Techrono BBS]
+	ConnectionType=ssh
+	Address=techrono.synchro.net
+	Port=22
+	Comment=
+
+[ConstructiveChaos BBS]
+	ConnectionType=ssh
+	Address=conchaos.synchro.net
+	Port=22
+	Comment=Just a chill, laid-back BBS built with retrogaming in mind, running over 200 classic door games, such as LORD, Usurper, Trade Wars, and Yankee Trader. Multiple message nets, MRC, and lots of original mods. Back online after taking a hiatus!
+
+[Capitol City Online]
+	ConnectionType=ssh
+	Address=capitolcityonline.net
+	Port=2022
+	Comment=FIDO/ILink/Dove/Micronet/VKRADIO/FSX/Pi/Developer/ Game/TQW/Sci/Agora/SF/Usenet National and International message areas. 20k+ files online, mostly DOS including Simtel archives from multiple years. Many local and league door games.
+
+[Baffa BBS]
+	ConnectionType=ssh
+	Address=baffa.zapto.org
+	Port=2322
+	Comment=BBS from Rio to remember old times...
+
+[Realm of the Wizard's Lair]
+	ConnectionType=telnet
+	Address=bbs.b-wells.us
+	Comment=The best BBS for and about Wizards! Under construction!
+
+[KC2MVB Mesh BBS]
+	ConnectionType=telnet
+	Address=kc2mvb.synchro.net
+	Port=23
+	Comment=HAM Radio BBS on our own AREDN nodes. We are testing out the use of Synchronet on this network for both setup and operation.
+
+[Desert Rats Sanctuary]
+	ConnectionType=ssh
+	Address=bbs.kn6q.org
+	Port=22
+	Comment=- LORD, BRE, TradeWars 2002 and more local games, Dove-Net and FidoNet message boards... DoorParty, CombatNet, and BBSLink InterBBS Games..  
+
+[The PipeLine BBS]
+	ConnectionType=telnet
+	Address=bbs.wantit.net
+	Port=23
+	Comment=Coming to you from the Front Range in beautiful Loveland, Colorado!
+
+[Mojo's World BBS]
+	ConnectionType=ssh
+	Address=mojo.synchro.net
+	Port=22
+	Comment=Mojo's World BBS Telnet: bbs.mojosworld.net Telnet: mojo.synchro.net Member Fidonet
+
+[Old Time BBS]
+	ConnectionType=telnet
+	Address=oldtimebbs.com
+	Port=23
+	Comment=
+
+[BRAZI.NET]
+	ConnectionType=ssh
+	Address=bbs.brazi.net
+	Port=6922
+	Comment=bbs.brazi.net  Warning: May contain nuts  
+
+[d0p3 BBS]
+	ConnectionType=ssh
+	Address=d0p3.intersrv.net
+	Port=22
+	Comment=OS/2 Files
+
+[8-bit Archive]
+	ConnectionType=ssh
+	Address=bbs.8-bitarchive.com
+	Port=2222
+	Comment=The 8-bit archive is an archive site for people wanting to know more about 8-bit computers or needing to download files such as schematics and other software.
+
+[TW Lounge BBS]
+	ConnectionType=ssh
+	Address=bbs.twlounge.net
+	Comment=Front-end for Tradewars game server    
+
+[Extricate BBS]
+	ConnectionType=ssh
+	Address=bbs.extricate.org
+	Port=4022
+	Comment=
+
+[Reverse Polarity]
+	ConnectionType=ssh
+	Address=revpol.lovelybits.org
+	Port=22
+	Comment=Local and networked boards, games, file echos Classic Internet and other experiments Resurrected from the 90s in the 604
+
+[Crack in Time BBS]
+	ConnectionType=telnet
+	Address=crackintimebbs.ddns.net
+	Port=2323
+	Comment=The Crack in Time BBS running native BBS software
+
+[Taco Pronto]
+	ConnectionType=ssh
+	Address=tacopronto.bbs.io
+	Port=2222
+	Comment=TIRED of waiting 2 hours for a taco?! GO TO TACO PRONTO!
+
+[DISKHOPPERS-PALACE]
+	ConnectionType=telnet
+	Address=diskhopp.synchro.net
+	Port=23
+	Comment=ran a bbs in the 90's took a break and now back at it again.. come join the fun door games a plenty will be adding a file base also. computer repair help slot machine repair help and ham radios are a big thing here
+
+[PMF]
+	ConnectionType=ssh
+	Address=bbs.venerandi.it
+	Port=22
+	Comment=The PaMaFa Software BBS Windows Server 2016 Datacenter Torino, Italy Ivano Venerandi Sysop www.pamafa.it
+
+[The TrapDoor BBS]
+	ConnectionType=telnet
+	Address=trapdoor.synchro.net
+	Port=23
+	Comment=An old BBS started up with newer software. Running 50 doors, dovenet, and 15 nodes. A place to hang out, have fun, meet new friends. All are welcome.
+
+[EthernetGateway]
+	ConnectionType=telnet
+	Address=EthernetGateway.com
+	Port=23
+	Comment=Simple BBS for vintage computers
+
+[The Loonie Inn]
+	ConnectionType=telnet
+	Address=theloonieinn.net
+	Port=23
+	Comment=The Loonie Inn was once known as The Loonie Bin Many registered Games.  q
+
+[Port of Call BBS]
+	ConnectionType=telnet
+	Address=PCTechdr.xyz
+	Port=23
+	Comment=Port of Call BBS
+
+[MSmac BBS]
+	ConnectionType=telnet
+	Address=msmacbbs.maletazul.pt
+	Port=23
+	Comment=MSmac BBS - Home of PCBoard Support Providing all CDC Support files
+
+[Protoweb BBS]
+	ConnectionType=ssh
+	Address=45.79.37.227
+	Port=22
+	Comment=
+
+[wassup]
+	ConnectionType=ssh
+	Address=wassup.the.net.nz
+	Port=22
+	Comment=wassup!
+
+[Starbug BBS]
+	ConnectionType=ssh
+	Address=starbugbbs.com
+	Port=22
+	Comment=Starbug is dedicated to the Amiga computer Now with Amiga music modules streaming over subsonic. starbugbbs.subsonic.org login: starbug Password: stream or starbugbbs.com:4040 for web streaming
+
+[Palantir]
+	ConnectionType=telnet
+	Address=palantirbbs.ddns.net
+	Port=23
+	Comment=A revival of my 90's BBS.  Dove, Fido, FSX, Micro, TQW, Retro, Pi, Hobby, Nix echos/files. Old-school filebase and multiple CDROMs online.  LOTS of Doom/Quake/Duke stuff!  Many local and BBSLink doors.  New callers welcome!
+
+[The Wastelands BBS]
+	ConnectionType=telnet
+	Address=wastelands-bbs.net:2323
+	Port=23
+	Comment=LOts of Files, Doorgames, Fidonet & DoveNet Drop By For A Blast From The Past!
+
+[Unleashed]
+	ConnectionType=telnet
+	Address=dns.unleashedinet.org
+	Port=23
+	Comment=Unleashed
+
+[Coprolyte BBS]
+	ConnectionType=telnet
+	Address=coprolytebbs.duckdns.org
+	Port=2323
+	Comment=Created for using with homebrew computer based on Zilog Z-80 (Z80-MBC2) with CP/M 3.0 onboard
+
+[Enigma BBS]
+	ConnectionType=telnet
+	Address=enigma-bbs.com
+	Port=23
+	Comment=Since 1994, then offline for a while, now back online because i'm nostalgic for these good old days
+
+[GlitchNet]
+	ConnectionType=telnet
+	Address=glitchtech.top
+	Port=23
+	Comment=The premier communication platform of Glitch Technologies. Now with Tarsweeper.
+
+[CLUBe da INSOnia]
+	ConnectionType=telnet
+	Address=bbs.conf.eti.br
+	Port=23
+	Comment=
+
+[TFSI]
+	ConnectionType=ssh
+	Address=bbs.tfsi.dev
+	Port=22
+	Comment=Access to fsxNet, FidoNet, tqwNet and DOVE-Net!    
+
+[CoCoNet]
+	ConnectionType=telnet
+	Address=74.65.39.90
+	Port=23
+	Comment=CocoNet is a place for 8-bit Tandy Color Computer enthusiasts to share stories, find how tos and other related fun things.
+
+[MIYANET]
+	ConnectionType=ssh
+	Address=bbs.miyanet.moe
+	Port=22
+	Comment=Miyanet BBS is made for connecting people liking animal-eared characters, anime and a little more. Like in Serial Experiments Lain, but in real network, with real hardware. Connect your "Wired" terminal and visit us!
+
+[Blood Storm]
+	ConnectionType=ssh
+	Address=bstorm.synchro.net
+	Comment=
+
+[The American Connection]
+	ConnectionType=ssh
+	Address=tacbbs.synchro.net
+	Port=22
+	Comment=The American Connection BBS originated in Erlensee Germany in 1990 and has now been resurrected.
+
+[Ricks BBS]
+	ConnectionType=ssh
+	Address=ricksbbs.synchro.net
+	Port=22
+	Comment=Enjoy playing vintage door games with me. Family and friends have enjoyed my BBS since the 80s. I have lots of text files, audio books, and media of all types to enjoy. Please join our family here as well. I hope to see you soon.
+
+[the Outwest BBS]
+	ConnectionType=telnet
+	Address=outwest.synchro.net
+	Port=23
+	Comment=the Outwest BBS ran on PCBoard 15.x from 1992-97 Then on 10-15-2015 I restarted the Outwest BBS running Synchronet 3.16 now Upgraded to 3.19 63 Door games, DoveNet message bases. outwest.synchro.net:23 outwest.synchro.net website
+
+[PrimeNet]
+	ConnectionType=telnet
+	Address=primenet.synchro.net
+	Port=23
+	Comment=Blast from the past. OTR, Magazines, Radio    
+
+[Lost Cause Halfway House]
+	ConnectionType=telnet
+	Address=bbs.lostcause.house
+	Port=23
+	Comment=Lost Cause Halfway House
+
+[Chookfest BBS]
+	ConnectionType=telnet
+	Address=bbs.chookfest.net
+	Port=23
+	Comment=BBS located in Melbourne Australia, ainly dedicated to retrocomputing.
+
+[Too Lazy BBS]
+	ConnectionType=ssh
+	Address=toolazy.synchro.net
+	Port=22
+	Comment=Come be lazy and enjoy reading messages , playing games, or chatting with others. FTN, QWK Message Areas, 6Game Servers, and IRC, MRC DDIAL and InterBBS chatting. 
+
+[Data Stream]
+	ConnectionType=telnet
+	Address=dsbbs.net
+	Port=23
+	Comment=Datastream BBS +o ACE
+
+[DarkAges BBS]
+	ConnectionType=telnet
+	Address=darkagesbbs.com
+	Port=23
+	Comment=DarkAges BBS located in Wayne OK Telnet darkagesbbs.com Web darkagesbbs.com
+
+[Solar Bee]
+	ConnectionType=telnet
+	Address=solarbee.uk
+	Port=23
+	Comment=Solar Bee - a solar battery powered BBS in Scotland. Stock synchronet at the moment, access to a few mail networks and a few classic BBS games. Some solar goodies coming soon!
+
+[Lunar Outpost]
+	ConnectionType=ssh
+	Address=lunarout.synchro.net
+	Port=22
+	Comment=Lunar Outpost BBS
+
+[4d2 dot org]
+	ConnectionType=ssh
+	Address=bbs.4d2.org
+	Port=22
+	Comment=A space for anarchists, cypherpunks and retrocomputing enthusiasts, provided by 4d2 dot org.  
+
+[PENNYBBS]
+	ConnectionType=telnet
+	Address=pennybbs.com
+	Port=23
+	Comment=PennyBBS, a Melbourne based BBS.
+
+[Forgotten Memories]
+	ConnectionType=telnet
+	Address=dazexy.synology.me
+	Port=52323
+	Comment=Created for the old childhood memories... Diskmags, text adventure games, doors, scenes... That was the really feeling, not this AI generated world... Greetings from Hungary!
+
+[C3BBS]
+	ConnectionType=telnet
+	Address=c3bbs.retronetworking.org
+	Port=23
+	Comment=C3BBS is a BBS related to CCC Events, where CCC is the Chaos Communication Club (German Hacker Organization). At those events, we have vintage / retrocomputing folks interested in BBSs.
+
+[Cw Shack Bbs]
+	ConnectionType=ssh
+	Address=kf4yey.com
+	Port=22
+	Comment=Cw Shack bbs
+
+[Halcyon BBS]
+	ConnectionType=ssh
+	Address=halcyon.synchro.net
+	Port=2222
+	Comment=
+
+[MasterCom BBS]
+	ConnectionType=ssh
+	Address=masterco.synchro.net
+	Port=22
+	Comment=A Retro-Geek Paradise
+
+[Freedom BBS]
+	ConnectionType=telnet
+	Address=packet.bustedwallet.org
+	Port=23
+	Comment=Freedom BBS, Upstate SC
+
+[Bookworm]
+	ConnectionType=ssh
+	Address=bookworm.synchro.net
+	Port=2222
+	Comment=A BBS that will be about literature, language, poetry and books of all kinds. Language of interest are Catalan, Spanish, Hungarian and Dutch. Otherwise, a reliving of my 1987 sysop days.
+
+[Electronic Chicken BBS]
+	ConnectionType=telnet
+	Address=bbs.electronicchicken.com
+	Port=23
+	Comment=Modem is over a VOIP connection
+
+[v01d c1ph3r]
+	ConnectionType=ssh
+	Address=bbs.canerduh.com
+	Port=22
+	Comment=SSH: void.canerduh.com:22056 Telnet: void.canerduh.com:23056 Hack. The. Planet.  
+
+[PartyBowlBBS]
+	ConnectionType=telnet
+	Address=partybowlbbs.ddns.net
+	Port=2323
+	Comment=Home of the World's Greatest Super Bowl Party BBS Open year round for all sorts of BBS activities It's not just about football! Come and visit!
+
+[Exoplanet]
+	ConnectionType=ssh
+	Address=exoplanetbbs.net
+	Port=22
+	Comment=Exoplanet BBS
+
+[Telnix BBS]
+	ConnectionType=ssh
+	Address=bbs.telnix.com
+	Port=6503
+	Comment=Telnix BBS is the reincarnation of Gnomes.org aka The Gnomes Guest House BBS. A bit dusty during slow construction. But life will return.  
+
+[Herbies-BBS III]
+	ConnectionType=telnet
+	Address=herbies-bbs.ddns.net:2424
+	Port=23
+	Comment=Herbies-BBS III located in the south of Germany currently under construction :-)   
+
+[The Mouth of Hell BBS]
+	ConnectionType=ssh
+	Address=mouthofhell.duckdns.org
+	Port=2222
+	Comment=Running Synchronet BBS in Montreal, Canada. LORD, Spades, Star Trek, Blackjack and Poker. ...Because Heaven's Too Crowded.
+
+[verify-nebula]
+	ConnectionType=telnet
+	Address=verify-nebula.kicks-ass.net
+	Port=23
+	Comment=
+
+[Dreamer's Place]
+	ConnectionType=ssh
+	Address=dreamers.place
+	Port=22
+	Comment=Just getting started. My own personal playground. Nothing special here yet, but new user's always welcome!
+
+[Camelot BBS]
+	ConnectionType=ssh
+	Address=camelotbbs.ddns.net
+	Port=22
+	Comment=Camelot BBS is located in Milton, WV Sysop is Merlin  
+
+[A-NET ONLINE LINUX]
+	ConnectionType=ssh
+	Address=x.a-net.online
+	Port=22222
+	Comment=A-Net Online's Linux Synchronet BBS Now Currently Running 1 win64 Synchronet 1 Linux Synchronet, 1 win32 Synchronet Door Game Server, and 1 Mystic Linux BBS X-League (777) InterBBS Games and more
+
+[Midnight-Club]
+	ConnectionType=telnet
+	Address=club.midnight-club.org
+	Port=23
+	Comment=Southern Virginia BBS in the woods We're back again..
+
+[1 Lucky Nerd]
+	ConnectionType=telnet
+	Address=LKYNRD73.SYNCHRO.NET
+	Port=148
+	Comment=A new BBS in Streator, IL home of the bulldogs.
+
+[Vague BBS]
+	ConnectionType=ssh
+	Address=20xd6
+	Port=22
+	Comment=Door games, DOVE-Net, and FidoNet. That's it.    
+
+[Convolution BBS]
+	ConnectionType=ssh
+	Address=convolution.us
+	Comment=Convolution BBS Message Networks, Doors TW2002 Game Server  
+
+[Live Wire BBS]
+	ConnectionType=telnet
+	Address=livewire.casacam.net
+	Port=23
+	Comment=
+
+[Hidden Paradise BBS II]
+	ConnectionType=telnet
+	Address=hpbbs.dyndns.org
+	Port=2323
+	Comment=Family type BBS.  Run both Synchronet and Winserver versions.  Door games are up and running along with some message areas.  Working on connecting door games to other systems.
+
+[Totally Nerd BBS]
+	ConnectionType=telnet
+	Address=totallynerd.com
+	Port=23
+	Comment=New Board still in works - hope to work in some common 'nerdy' hobbies like BBSing, amateur radio, programming, and even things like scouting, hiking, and camping. Hopefully something for everyone once it's done!
+
+[Door Games Unlimited]
+	ConnectionType=telnet
+	Address=DGU.Zapto.org
+	Port=23
+	Comment=Back from the Dead, Door Games Unlimited has over 300 Door Games to enjoy. I'm adding new files every day including a large selection of modules for Forgotten Realms Unlimited Adventures.
+
+[Sulf BBS]
+	ConnectionType=telnet
+	Address=mybbs.com
+	Port=23
+	Comment=
+
+[Jamaica Joe's]
+	ConnectionType=telnet
+	Address=bbs.jamaicajoes.net
+	Port=8011
+	Comment=Retro BBS from the 80's and 90's from Dallas area. Now primarily focused on door games and discussion groups for science fiction fans, tabletop board gaming and all things 80's!
+
+[Funtopia BBS]
+	ConnectionType=ssh
+	Address=funtopia.synchro.net
+	Port=3022
+	Comment=Yet another Synchronet BBS! Based in Germany. Still in the process of customization. As of now, it is about learning Synchronet and being a part of whats called the BBS Scene =) Hope to see everyone of you for a visit!
+
+[Thunder-Line BBS]
+	ConnectionType=ssh
+	Address=thunder.synchro.net
+	Port=22
+	Comment=Member of X-League 777 Inter-BBS Doors Barren Realms, Falcon's Eye, LORD IBBS The Arcadian Legend and more. Game Servers - A-Net - BBSLink - DoorParty 
+
+[The C64 Pub]
+	ConnectionType=ssh
+	Address=bbs.c64.pub
+	Port=22
+	Comment=The Pub is Open!
+
+[ZenBBS]
+	ConnectionType=telnet
+	Address=zen.kawasu.wtf
+	Port=23
+	Comment=
+
+[LoCk ANd LoAdED BBS]
+	ConnectionType=telnet
+	Address=
+	Port=23
+	Comment=A fun board for all sorts of hobbist. Fido net along with the rest of the message nets coming soon. A Dial up node is planned for down the road. bbs.w1cjf.com:6969 telnet bbs.w1cjf.com:420 ssh.
+
+[The Valley BBS]
+	ConnectionType=telnet
+	Address=valleybbs.com
+	Port=23
+	Comment=A great BBS in Summerland, BC Canada.
+
+[The Midnight Lounge BBS]
+	ConnectionType=telnet
+	Address=lounge.mbl.social
+	Port=23
+	Comment=A great new BBS in Panama City Beach, FL.
+
+[Digital Rainbow]
+	ConnectionType=telnet
+	Address=bbs.digitalrainbow.info
+	Port=23
+	Comment=New BBS in NSW, Australia. Help make something! Linux, C64, AMIGA, DOS, Sim Racing, Programming Electronics and Live Music Production. Currently sorting SID/MOD collection to create a playlist of the best.
+
+[Raiders Inc BBS]
+	ConnectionType=telnet
+	Address=raiders.zapto.org:1337
+	Port=23
+	Comment=Msgs, Files, Games, Chat
+
+[Ice Castle BBS]
+	ConnectionType=ssh
+	Address=ice-castle-bbs.net
+	Port=22
+	Comment=
+
+[Hidden Paradse BBS II]
+	ConnectionType=telnet
+	Address=hpbbs.dyndns.org
+	Port=2323
+	Comment=Family style BBS with door games available
+
+[BeeBSII]
+	ConnectionType=telnet
+	Address=BeeBS.ddns.net
+	Port=23
+	Comment=BeeBS the
+
+[Mutiny]
+	ConnectionType=ssh
+	Address=mutinybbs.com
+	Port=2232
+	Comment=Mutiny BBS hosts over 30 door games, has a small but active community.
+
+[GeekCafe.XYZ]
+	ConnectionType=telnet
+	Address=geekcafe.xyz
+	Port=23
+	Comment=Geekout about tech. Help us Archieve old support articles, software and create useful support articles for generations to find.
+
+[Cyrellia BBS]
+	ConnectionType=SSH
+	Address=bbs.cyrellia.com
+	Port=2222
+	Comment=Cyrellia BBS - Operated by Cyrellia LLC (Ryan Masters) in Orlando, Florida. Established 2025.
+
+[The Crystal Set]
+	ConnectionType=ssh
+	Address=zl4kj.nz
+	Port=2222
+	Comment=Escape the social media overload with a focused, friendly & engaging community of CB Radio, Ham and Electronics discussion & play some door games too. Join us for a mix of classic BBS vibes and fresh conversations with the newly rebranded BBS.
+
+[Diamond Mine Online]
+	ConnectionType=telnet
+	Address=bbs.dmine.net
+	Port=23
+	Comment=Home to the Telnet BBS Guide
+
+[Echo Chamber]
+	ConnectionType=telnet
+	Address=echochamber.zapto.org:3640
+	Port=23
+	Comment=A BBS for messages and discussion
+
+[The Thunderbolt BBS]
+	ConnectionType=telnet
+	Address=wx4qzbbs.ddnsfree.com
+	Port=49815
+	Comment=Arkansas' Ham Radio and Weather BBS, now back up after an extended hiatus. First Online May, 1992. Message Areas, Files, Doors, G/PG Content Only.
+
+[Digital Dreams]
+	ConnectionType=ssh
+	Address=ddreams.synchro.net
+	Port=22
+	Comment=Telnet for Digital Dreams
+
+[Killed In Action BBS]
+	ConnectionType=telnet
+	Address=kia.zapto.org
+	Port=23
+	Comment=Ton of Doors, Files and Messages!
+
+[Jacob's Hideout BBS]
+	ConnectionType=ssh
+	Address=bbs.jacobcat.app
+	Port=22
+	Comment=A small BBS in Manila, Philippines
+
+[Clutch]
+	ConnectionType=telnet
+	Address=clutchbbs.com
+	Port=23
+	Comment=Been running since the 90's, and relaunched in 2008.
+
+[Kalgoorlie Retro BBS]
+	ConnectionType=telnet
+	Address=bbs.theiguru.au
+	Port=2323
+	Comment=This board aims to promote old-time retro computing and gaming. A place for enthusiasts of all things retrol
+
+[Futureland]
+	ConnectionType=telnet
+	Address=futureland.today
+	Port=23
+	Comment=totally customized crazy board for hardcore 1337 afficionados with their cadillacs and intercontinental ham radios that are so pork filled it even makes the most hardened donut eaters blush with cannibalistic fervor
+
+[Local Yocal BBS]
+	ConnectionType=telnet
+	Address=localyocalbbs.com
+	Port=23
+	Comment=Tons of games! LORD, Usurper, Global War, and more.
+
+[The Underground]
+	ConnectionType=telnet
+	Address=theunderground.us:10023
+	Port=23
+	Comment=Home of Guido dating back to 1989 Originally run on WWIV now on Mystic
+
+[Richard Fun House]
+	ConnectionType=ssh
+	Address=sbbs.richardf.us
+	Port=22
+	Comment=Fun place to play games and read messages
+
+[Diamond Mine Online BBS]
+	ConnectionType=telnet
+	Address=sbbs.dmine.net
+	Port=24
+	Comment=The Diamond Mine Online is your destination for all things BBS related - messages, games, and files! Access to over 200 door games! Home to the BBS Corner and the Telnet BBS Guide!
+
+[pPc]
+	ConnectionType=ssh
+	Address=ppc.synchro.net
+	Port=22
+	Comment=PrOuD pIrTaTeS cOvE (pPc) PoRn - DoOrS - wArEz OlD sChOoL eLiTe BbS 19K+ fIlEs/LoAdS oF rOmS tOo uP wEeKeNdS OnLy CuRrEnTlY!
+
+[Digital Aquarium BBS]
+	ConnectionType=ssh
+	Address=digiaqua.synchro.net
+	Comment=Started as a Renedage board in 95-97. Came back a a Synchronet board in 2007. Some general bbs stuff, programming, wallpapers, mod/s3m. Computer history, electronics, pc games. Mostly modern with some nostalgic flair.
+
+[BBS GAMER]
+	ConnectionType=rlogin
+	Address=bbsgamer.ddns.net
+	Port=513
+	Comment=BBS Gamer is your portal to the past - packed with legendary door games, file sections, and endless nostalgia for the Commodore and Amiga era. Log in, play hard, and connect with the community that keeps the retro scene alive!
+
+[BBS Development]
+	ConnectionType=ssh
+	Address=bbsdev.net
+	Port=22
+	Comment=Home BBS of SyncTERM
+
+[Playmate]
+	ConnectionType=telnet
+	Address=playmate.dynu.com
+	Port=8023
+	Comment=Work hard, play hard! Second telnet address is really SSH. More secure!
+
+[Overfit]
+	ConnectionType=ssh
+	Address=overfit.retrievo.xyz
+	Port=8022
+	Comment=Overfit BBS - A classic Synchronet board bringing back the golden era of BBS Networking.
+
+[cosmoNET BBS]
+	ConnectionType=ssh
+	Address=chipcunk.synchro.net
+	Port=22
+	Comment=
+
+[Orreli]
+	ConnectionType=ssh
+	Address=bbs.orreli.net
+	Port=45022
+	Comment=Orreli BBS, located in Odda, Norway. Your gateway to play old Door Games!   
+
+[Citrick BBS]
+	ConnectionType=ssh
+	Address=citlmbbs.synchro.net
+	Port=2424
+	Comment=Dedicated to all retro hardware currently available, from real equipment to FPGAs or emulation.
+
+[Crazy World BBS]
+	ConnectionType=SSH
+	Address=crazyworldbbs.com
+	Port=2222
+	Comment=Full of doors,bbslink,Trade war Game Server
+
+[The Ham Shack BBS]
+	ConnectionType=telnet
+	Address=hamshack.synchro.net
+	Port=23
+	Comment=All things Amateur Radio and more! Files, Doorparty, BBSLink, Inter-BBS Trade Wars, and more!  
+
+[LoCKed AnD LoAdeD BBS]
+	ConnectionType=telnet
+	Address=lockedandloadedbbs.com
+	Port=23
+	Comment=Your FireArms BBS 3d printing and all the goods
+
+[JERSEY JAM]
+	ConnectionType=telnet
+	Address=JERSEYJAM.com
+	Port=23
+	Comment=Jersey Jam - BBS still under development.  
+
+[Fireside BBS]
+	ConnectionType=rlogin
+	Address=firesidebbs.com
+	Port=513
+	Comment=Fireside BBS is home of the AI-WX Weather Door. And Lone Wolf Software Support.
+
+[HeXeD]
+	ConnectionType=telnet
+	Address=hexedbbs.com:23999
+	Port=23
+	Comment=HeXeD OBV/2 2.40b2
+
+[Dumuzi BBS]
+	ConnectionType=ssh
+	Address=dumuzi.lykaina.com
+	Port=22
+	Comment=A small and simple BBS. ssh access on port 42022
+
+[KrAABy Gamer BBS]
+	ConnectionType=telnet
+	Address=kraaby.synchro.net
+	Port=23
+	Comment=Old school BBS returning under a new name and theme dedicated to all things gaming.
+
+[TARDIS]
+	ConnectionType=telnet
+	Address=bbs1.tardisbbs.com
+	Port=8023
+	Comment=Tardis BBS - Focus on Retro Computing   
+
+[LNRC-IN/FED Boards]
+	ConnectionType=telnet
+	Address=sync.lnrcbbs.net
+	Port=23
+	Comment=The official BBS of the Indiana Late Night Radio Club.
+
+[Echoes BBS]
+	ConnectionType=telnet
+	Address=echoes.120v.ac
+	Port=23
+	Comment=Echoes BBS
+
+[Zruspa's BBS]
+	ConnectionType=ssh
+	Address=bbs.zruspas.org
+	Port=22
+	Comment=Zruspa's BBS. A general-interest BBS with Fidonet messages from  around the world, including Spain, Argentina, Brazil, Russia, Germany,  international areas in English, and more... In addition to Fidonet, we  also have FSXNet.
+
+[The Looney Bin BBS!]
+	ConnectionType=ssh
+	Address=looneybinbbs.com
+	Port=2022
+	Comment=Fun and Entertainment from a Modern vs Retro system.
+
+[Day Of The Tentacle]
+	ConnectionType=Telnet
+	Address=dott.synchro.net
+	Port=2424
+	Comment=Full Of Doors,Trade War Game Server Doorparty / BBSLink
+
+[KK4QBN BBS]
+	ConnectionType=ssh
+	Address=kk4qbn.synchro.net
+	Port=22
+	Comment=Tons Classic Game downloads from all your favorite developers, backup roms of games for all your consoles, hundreds of registered RPG and action games available to play, also some HAM radio stuff available for your pleasure. visit today.
+
+[A-NET ONLINE bEtA]
+	ConnectionType=ssh
+	Address=x.a-net.online
+	Port=22222
+	Comment=A-Net Online bEtA BBS
+
+[THe iNSANE AsYLuM]
+	ConnectionType=ssh
+	Address=tiabbs.synchro.net
+	Port=22
+	Comment=Old School SysOp 73+ Registerd Games TW 5 Node Game Server 6000+ Files TOns of BBS Software Warez Serials, Full programs , Cracks , Tons of Synchronet Support files and Mods, Linked to Game Servers
+
+[Telnix]
+	ConnectionType=ssh
+	Address=datgsguy.com
+	Port=2222
+	Comment=Made for language files and discussion from datGSguy on tiktok. Language file updated after every livestream.
+
+[Yak Station]
+	ConnectionType=ssh
+	Address=bbs.mycrowd.ca
+	Port=22
+	Comment=It's 2026 and we're giving this setup a go. This is a private system presently - I expect it to take a while before we consider opening to the public. However, we exist, we're here, we're looking to have some fun with this.
+
+[Wizard's Castle]
+	ConnectionType=telnet
+	Address=wccastle.synchro.net
+	Port=24
+	Comment=Message Dove-Net/USEnet, Tradewars, 250 Doors Games, and more.
+
+[Wildcat's Castle]
+	ConnectionType=telnet
+	Address=bbs.wccastle.net
+	Port=2424
+	Comment=Messages, Files and CD library over 400,000 files. 250+ registration door games, 25+ TradeWar 2000 16bit and 32bit (server). All time high scores in Website with TradeWar 2000 and Door Games.  BBS Since 1993.
+
+[Starbase Discovery]
+	ConnectionType=ssh
+	Address=sb-discovery.com
+	Port=22
+	Comment=a new bbs with games msg's and files with more comeing
+
+[Madman with a Blue Box BBS]
+	ConnectionType=telnet
+	Address=madmanbbs.ddns.net
+	Port=23
+	Comment=Highly modded Mystic BBS Doctor Who Themed A place for writers.
+
+[Chaotic Factor BBS]
+	ConnectionType=telnet
+	Address=cfbbs.ddns.net
+	Port=23
+	Comment=Retro old school neighborhood board
+
+[The Nest!]
+	ConnectionType=ssh
+	Address=thenest.megabytez.pt
+	Port=22
+	Comment=The Nest! BBS An oldtimes like CyberSec HUB With useful tools for reconnaissance for your convenience ************************************
+
+[LNRC-IN Boards]
+	ConnectionType=ssh
+	Address=LNRCServ
+	Port=22
+	Comment=
+
+[datGSguy BBS]
+	ConnectionType=ssh
+	Address=datgsguy.com
+	Port=22
+	Comment=Support for datGSguy livestream, Language Focused USENET and more. Holodeck door with AI as GM AI message groups where ai joins the conversations Post a debate topic and watch AI models argue Some fun files and scripts for download
+
+[ASANOCOMP]
+	ConnectionType=ssh
+	Address=asanocomp.ddns.net
+	Port=2200
+	Comment=Message boards, Doors, and a growing list of support for vintage hardware. A work in progress!
+
+[Hobby Space]
+	ConnectionType=ssh
+	Address=Hobbyspace.ddns.net
+	Port=22
+	Comment=Testing Things out
+
+[ASTRONET BBS]
+	ConnectionType=ssh
+	Address=192.168.1.150
+	Port=22
+	Comment=Former Wildcat Sysop just getting back in the saddle. I love Synchronet and Mystic software. Adding more each week...
+
+[Frontier BBS]
+	ConnectionType=ssh
+	Address=frontierbbs.co.uk
+	Port=22
+	Comment=Frontier BBS is back! After not being online since 1993! We're a general BBS, all the usual doors. Building up our file areas (esp. Commodore and Amiga). Come along and say hello. We're in the UK but welcome visitors from all over the world!
+

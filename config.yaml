@@ -16,6 +16,7 @@ global:
   init_sequence:
     - "AT&F"       # Factory reset
     - "ATE0"       # Command echo off (prevent buffer pollution)
+    - "AT&B1"      # Fixed DTE rate (don't change serial speed on connect)
     - "ATV1"       # Verbose result codes
     - "ATQ0"       # Enable result codes
     - "AT&C1"      # DCD follows carrier
