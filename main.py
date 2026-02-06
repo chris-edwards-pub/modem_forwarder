@@ -104,7 +104,10 @@ def main_loop(config_path: str = "config.yaml") -> None:
                         selected_bbs = selection
 
                     # Bridge to selected BBS
-                    bridge_session(ser, selected_bbs, gc)
+                    result = bridge_session(ser, selected_bbs, gc)
+                    if result is False:
+                        # Connection failed, return to menu
+                        continue
                     break  # After session ends, go back to waiting for next call
 
                 # Post-session cleanup

@@ -33,7 +33,7 @@ def bridge_session(
     if sock is None:
         logger.error(f"Could not connect to {bbs.name}")
         modem_print(ser, "Connection failed.", debug=config.debug_modem)
-        return
+        return False
 
     logger.info(f"Connected to {bbs.name} via {protocol}")
 

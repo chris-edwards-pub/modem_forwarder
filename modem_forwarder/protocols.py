@@ -117,58 +117,62 @@ def create_ssh_connection(
         modem_print(ser, "SSH not available (paramiko not installed)", debug=debug)
         return None
 
-    # Prompt for credentials
     modem_print(ser, "", debug=debug)
     modem_print(ser, f"SSH connection to {bbs.host}:{bbs.port}", debug=debug)
-    modem_print(ser, "", debug=debug)
 
-    username = modem_input(ser, prompt="Username: ", allow_empty=True, debug=debug)
+    while True:
+        modem_print(ser, "", debug=debug)
 
-    if username:
-        password = modem_input(ser, prompt="Password: ", mask_char="*", debug=debug)
-    else:
-        password = None
+        username = modem_input(ser, prompt="Username: ", allow_empty=True, debug=debug)
 
-    try:
-        if debug:
-            logger.debug(f"Creating SSH connection to {bbs.host}:{bbs.port} as {username}")
-
-        client = paramiko.SSHClient()
-        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-        connect_kwargs = {
-            "hostname": bbs.host,
-            "port": bbs.port,
-            "timeout": timeout,
-            "look_for_keys": False,
-            "allow_agent": False,
-        }
         if username:
-            connect_kwargs["username"] = username
-        if password:
-            connect_kwargs["password"] = password
+            password = modem_input(ser, prompt="Password: ", mask_char="*", debug=debug)
+        else:
+            password = None
 
-        client.connect(**connect_kwargs)
+        try:
+            if debug:
+                logger.debug(f"Creating SSH connection to {bbs.host}:{bbs.port} as {username}")
 
-        # Get interactive shell channel
-        channel = client.invoke_shell(term="ansi", width=80, height=24)
-        channel.settimeout(0.0)  # Non-blocking
+            client = paramiko.SSHClient()
+            client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-        logger.info(f"SSH connected to {bbs.host}:{bbs.port}")
-        return SSHChannelWrapper(channel)
+            connect_kwargs = {
+                "hostname": bbs.host,
+                "port": bbs.port,
+                "timeout": timeout,
+                "look_for_keys": False,
+                "allow_agent": False,
+            }
+            if username:
+                connect_kwargs["username"] = username
+            if password:
+                connect_kwargs["password"] = password
 
-    except paramiko.AuthenticationException:
-        logger.error("SSH authentication failed")
-        modem_print(ser, "Authentication failed.", debug=debug)
-        return None
-    except paramiko.SSHException as e:
-        logger.error(f"SSH error: {e}")
-        modem_print(ser, f"SSH error: {e}", debug=debug)
-        return None
-    except Exception as e:
-        logger.error(f"SSH connection failed: {e}")
-        modem_print(ser, f"Connection failed: {e}", debug=debug)
-        return None
+            client.connect(**connect_kwargs)
+
+            # Get interactive shell channel
+            channel = client.invoke_shell(term="ansi", width=80, height=24)
+            channel.settimeout(0.0)  # Non-blocking
+
+            logger.info(f"SSH connected to {bbs.host}:{bbs.port}")
+            return SSHChannelWrapper(channel)
+
+        except paramiko.AuthenticationException:
+            logger.error("SSH authentication failed")
+            modem_print(ser, "Authentication failed.", debug=debug)
+        except paramiko.SSHException as e:
+            logger.error(f"SSH error: {e}")
+            modem_print(ser, f"SSH error: {e}", debug=debug)
+        except Exception as e:
+            logger.error(f"SSH connection failed: {e}")
+            modem_print(ser, f"Connection failed: {e}", debug=debug)
+
+        # Prompt to retry or return to menu
+        modem_print(ser, "", debug=debug)
+        choice = modem_getch(ser, prompt="(R)etry or (M)enu? ", debug=debug)
+        if choice.upper() != b"R":
+            return None
 
 
 def create_rlogin_connection(
