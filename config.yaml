@@ -14,7 +14,7 @@ global:
   log_level: "DEBUG"
   # USR Courier init sequence
   init_sequence:
-    - "AT&F"       # Factory reset
+    - "ATZ"        # Reset to stored profile
     - "ATE0"       # Command echo off (prevent buffer pollution)
     - "AT&B1"      # Fixed DTE rate (don't change serial speed on connect)
     - "ATV1"       # Verbose result codes
