@@ -2,6 +2,7 @@
 
 import logging
 import selectors
+import time
 
 import serial
 
@@ -53,12 +54,18 @@ def bridge_session(
     sel.register(ser, selectors.EVENT_READ, data="modem")
     sel.register(sock, selectors.EVENT_READ, data="bbs")
 
-    logger.info("Connection established. Entering bridge loop...")
+    idle_timeout = config.idle_timeout
+    logger.info(f"Connection established. Entering bridge loop... (idle timeout: {idle_timeout}s)")
 
+    last_activity = time.time()
     try:
         while True:
             events = sel.select(1)
             if not events:
+                if idle_timeout and time.time() - last_activity > idle_timeout:
+                    logger.warning(f"Session timed out after {idle_timeout}s of inactivity")
+                    modem_print(ser, "\r\nSession timed out due to inactivity.", debug=config.debug_modem)
+                    return
                 continue
 
             for key, mask in events:
@@ -72,6 +79,7 @@ def bridge_session(
                         data = b""
 
                     if data:
+                        last_activity = time.time()
                         if config.debug_modem:
                             logger.debug(f"Modem->Telnet: {len(data)} bytes: {data[:80]!r}")
                         try:
@@ -90,6 +98,7 @@ def bridge_session(
                         data = b""
 
                     if data:
+                        last_activity = time.time()
                         if config.debug_modem:
                             logger.debug(f"Telnet->Modem: {len(data)} bytes: {data[:80]!r}")
                         try:
