@@ -37,3 +37,9 @@ bbs_entries:
     protocol: telnet
     auto_login: null
 
+  - name: "The C64 Pub SSH (ANSI/ASCII)"
+    description: "Retro computing BBS "
+    host: "bbs.c64.pub"
+    port: 2222
+    protocol: ssh
+    auto_login: null
