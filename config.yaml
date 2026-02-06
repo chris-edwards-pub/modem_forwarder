@@ -8,10 +8,10 @@ global:
   bbs_read_chunk: 1024
   hangup_read_timeout: 0.5
   idle_timeout: 300  # seconds of inactivity before disconnect (0 = disabled)
-  debug_modem: false
+  debug_modem: true
   welcome_message: "Welcome to the BBS Gateway!"
   log_file: "modem_forwarder.log"
-  log_level: "INFO"
+  log_level: "DEBUG"
   # USR Courier init sequence
   init_sequence:
     - "AT&F"       # Factory reset
