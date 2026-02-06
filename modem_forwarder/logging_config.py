@@ -5,13 +5,14 @@ import sys
 from pathlib import Path
 
 
-def setup_logging(log_file: str = "modem_forwarder.log", level: str = "INFO") -> None:
+def setup_logging(log_file: str = "modem_forwarder.log", level: str = "INFO", console: bool = True) -> None:
     """
-    Configure logging to file and console.
+    Configure logging to file and optionally console.
 
     Args:
         log_file: Path to log file.
         level: Log level (DEBUG, INFO, WARNING, ERROR).
+        console: If True, also log to console (stdout).
     """
     # Convert level string to logging constant
     log_level = getattr(logging, level.upper(), logging.INFO)
@@ -36,9 +37,10 @@ def setup_logging(log_file: str = "modem_forwarder.log", level: str = "INFO") ->
     root_logger.addHandler(file_handler)
 
     # Console handler
-    console_handler = logging.StreamHandler(sys.stdout)
-    console_handler.setLevel(log_level)
-    console_handler.setFormatter(formatter)
-    root_logger.addHandler(console_handler)
+    if console:
+        console_handler = logging.StreamHandler(sys.stdout)
+        console_handler.setLevel(log_level)
+        console_handler.setFormatter(formatter)
+        root_logger.addHandler(console_handler)
 
     logging.info(f"Logging initialized: level={level}, file={log_file}")

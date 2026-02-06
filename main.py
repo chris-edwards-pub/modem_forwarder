@@ -77,20 +77,22 @@ def menu_loop(ser, config, gc, external_bbs_list, term_type, local_mode=False):
         return
 
 
-def main_loop(config_path: str = "config.yaml", local_mode: bool = False) -> None:
+def main_loop(config_path: str = "config.yaml", local_mode: bool = False, debug: bool = False) -> None:
     """
     Main application loop.
 
     Args:
         config_path: Path to configuration file.
         local_mode: If True, use local terminal instead of modem.
+        debug: If True, show log output on console.
     """
     # Load configuration
     config = load_config(config_path)
     gc = config.global_config
 
-    # Setup logging
-    setup_logging(log_file=gc.log_file, level=gc.log_level)
+    # In local mode, suppress console logging unless --debug is passed
+    show_console = not local_mode or debug
+    setup_logging(log_file=gc.log_file, level=gc.log_level, console=show_console)
 
     logger.info("Modem Forwarder starting...")
     logger.info(f"Loaded {len(config.bbs_entries)} BBS entries")
@@ -151,6 +153,7 @@ def main_loop(config_path: str = "config.yaml", local_mode: bool = False) -> Non
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Modem Forwarder - Multi-BBS Menu System")
     parser.add_argument("--local", action="store_true", help="Local mode: use terminal instead of modem")
+    parser.add_argument("--debug", action="store_true", help="Show log output on console")
     parser.add_argument("--config", default="config.yaml", help="Path to configuration file")
     args = parser.parse_args()
-    main_loop(config_path=args.config, local_mode=args.local)
+    main_loop(config_path=args.config, local_mode=args.local, debug=args.debug)
