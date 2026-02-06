@@ -287,5 +287,8 @@ def prompt_search_term(
         Search string entered by user.
     """
     safe_print(ser, "", term_type, debug=debug)
-    search = modem_input(ser, prompt="Search: ", debug=debug)
+    color_print(ser, "Enter search term (searches name and description)", Color.CYAN, term_type, debug=debug)
+    color_print(ser, "Press Enter to cancel", Color.WHITE, term_type, debug=debug)
+    safe_print(ser, "", term_type, debug=debug)
+    search = modem_input(ser, prompt="Search: ", echo=True, debug=debug)
     return search.strip()

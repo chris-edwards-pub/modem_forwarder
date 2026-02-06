@@ -27,20 +27,25 @@ def modem_print(ser: serial.Serial, text: str, debug: bool = False) -> None:
     ser.flush()
 
 
-def modem_input(ser: serial.Serial, prompt: Optional[str] = None, debug: bool = False) -> str:
+def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = False, debug: bool = False) -> str:
     """
     Optionally send a prompt, then read and return a line of input from the modem.
 
     Args:
         ser: Serial port object.
         prompt: Optional prompt to display before reading.
+        echo: Echo characters back to the modem as they are typed.
         debug: Enable debug logging.
 
     Returns:
         The input line (without line ending).
     """
     if prompt:
-        modem_print(ser, prompt, debug=debug)
+        # Use write directly to avoid adding CRLF for inline prompts
+        ser.write(prompt.encode(errors="replace"))
+        ser.flush()
+        if debug:
+            logger.debug(f"Writing prompt to modem: {prompt!r}")
     buf = b""
     while True:
         waiting = ser.in_waiting
@@ -52,10 +57,24 @@ def modem_input(ser: serial.Serial, prompt: Optional[str] = None, debug: bool = 
                 logger.debug(f"Read byte: {ch!r}")
             if ch in (b'\r', b'\n'):
                 if buf:
+                    if echo:
+                        ser.write(b"\r\n")
+                        ser.flush()
                     break
                 else:
                     continue  # ignore leading newlines
+            # Handle backspace
+            if ch in (b'\x08', b'\x7f'):
+                if buf:
+                    buf = buf[:-1]
+                    if echo:
+                        ser.write(b"\x08 \x08")  # Backspace, space, backspace
+                        ser.flush()
+                continue
             buf += ch
+            if echo:
+                ser.write(ch)
+                ser.flush()
         else:
             time.sleep(0.05)
     return buf.decode(errors="replace")
