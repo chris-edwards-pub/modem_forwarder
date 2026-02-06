@@ -27,7 +27,7 @@ def modem_print(ser: serial.Serial, text: str, debug: bool = False) -> None:
     ser.flush()
 
 
-def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = True, mask_char: Optional[str] = None, allow_empty: bool = False, debug: bool = False) -> str:
+def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = True, mask_char: Optional[str] = None, allow_empty: bool = False, timeout: Optional[int] = None, debug: bool = False) -> Optional[str]:
     """
     Optionally send a prompt, then read and return a line of input from the modem.
 
@@ -37,10 +37,11 @@ def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = T
         echo: Echo characters back to the modem as they are typed.
         mask_char: If set, echo this character instead of the actual input (e.g. "*" for passwords).
         allow_empty: If True, pressing Enter with no input returns an empty string.
+        timeout: Maximum seconds to wait for input (None = wait forever, 0 = disabled).
         debug: Enable debug logging.
 
     Returns:
-        The input line (without line ending).
+        The input line (without line ending), or None if timed out.
     """
     if prompt:
         # Use write directly to avoid adding CRLF for inline prompts
@@ -49,7 +50,11 @@ def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = T
         if debug:
             logger.debug(f"Writing prompt to modem: {prompt!r}")
     buf = b""
+    deadline = time.time() + timeout if timeout else None
     while True:
+        if deadline and time.time() > deadline:
+            logger.info(f"modem_input timed out after {timeout}s of inactivity")
+            return None
         waiting = ser.in_waiting
         if waiting:
             if debug:
@@ -82,21 +87,26 @@ def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = T
     return buf.decode(errors="replace")
 
 
-def modem_getch(ser: serial.Serial, prompt: Optional[str] = None, debug: bool = False) -> bytes:
+def modem_getch(ser: serial.Serial, prompt: Optional[str] = None, timeout: Optional[int] = None, debug: bool = False) -> Optional[bytes]:
     """
     Optionally send a prompt, then wait for and return a single character from the modem.
 
     Args:
         ser: Serial port object.
         prompt: Optional prompt to display before reading.
+        timeout: Maximum seconds to wait (None = wait forever, 0 = disabled).
         debug: Enable debug logging.
 
     Returns:
-        Single byte read from modem.
+        Single byte read from modem, or None if timed out.
     """
     if prompt:
         modem_print(ser, prompt, debug=debug)
+    deadline = time.time() + timeout if timeout else None
     while True:
+        if deadline and time.time() > deadline:
+            logger.info(f"modem_getch timed out after {timeout}s of inactivity")
+            return None
         waiting = ser.in_waiting
         if waiting:
             if debug:

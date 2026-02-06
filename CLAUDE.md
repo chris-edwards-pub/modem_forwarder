@@ -114,6 +114,13 @@ pytest tests/ --cov=modem_forwarder
 
 ## Development Notes
 
+### Logging
+- Always add logging (at appropriate levels) to each new function
+- Use `logger.info()` for significant events (connections, disconnects, selections)
+- Use `logger.warning()` for timeouts and unexpected conditions
+- Use `logger.error()` for failures
+- Use `logger.debug()` for verbose/trace-level output (gated behind `debug` flag where applicable)
+
 ### Terminal Detection
 - Sends ANSI cursor position request (`ESC[6n`)
 - ANSI/VT100 terminals respond with `ESC[row;colR`

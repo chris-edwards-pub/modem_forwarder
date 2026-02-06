@@ -44,6 +44,7 @@ class GlobalConfig:
     init_sequence: List[str] = field(default_factory=lambda: [
         "ATZ", "AT&D0", "AT&C0", "ATV1", "ATS0=1"
     ])
+    idle_timeout: int = 300  # seconds (0 = disabled)
     external_bbs_url: str = "https://syncterm.bbsdev.net/syncterm.lst"
     external_bbs_cache: str = "syncterm_cache.lst"
 
@@ -94,6 +95,7 @@ def _parse_global_config(data: dict) -> GlobalConfig:
         log_file=data.get("log_file", "modem_forwarder.log"),
         log_level=data.get("log_level", "INFO"),
         init_sequence=data.get("init_sequence", ["ATZ", "AT&D0", "AT&C0", "ATV1", "ATS0=1"]),
+        idle_timeout=data.get("idle_timeout", 300),
         external_bbs_url=data.get("external_bbs_url", "https://syncterm.bbsdev.net/syncterm.lst"),
         external_bbs_cache=data.get("external_bbs_cache", "syncterm_cache.lst"),
     )

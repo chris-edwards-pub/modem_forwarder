@@ -61,6 +61,7 @@ def get_selection(
     bbs_entries: List[BBSEntry],
     term_type: TerminalType,
     has_external: bool = False,
+    idle_timeout: int = 0,
     debug: bool = False,
 ) -> Union[BBSEntry, str, None]:
     """
@@ -71,6 +72,7 @@ def get_selection(
         bbs_entries: List of available BBS entries.
         term_type: Terminal type for charset-safe output.
         has_external: Whether external BBS menu is available.
+        idle_timeout: Seconds of inactivity before auto-disconnect (0 = disabled).
         debug: Enable debug logging.
 
     Returns:
@@ -78,10 +80,14 @@ def get_selection(
     """
     max_choice = len(bbs_entries)
     prompt_extra = ", X for external" if has_external else ""
+    timeout = idle_timeout if idle_timeout else None
 
     while True:
         color_print(ser, f"Enter choice (1-{max_choice}{prompt_extra}, 0 to hang up): ", Color.CYAN, term_type, debug=debug)
-        ch = modem_getch(ser, debug=debug)
+        ch = modem_getch(ser, timeout=timeout, debug=debug)
+        if ch is None:
+            logger.info("Menu selection timed out due to inactivity")
+            return None
         ch_str = ch.decode(errors="ignore").upper()
 
         # Check for external menu
@@ -113,6 +119,7 @@ def display_external_menu(
     external_bbs: List[BBSEntry],
     term_type: TerminalType,
     page_size: int = 15,
+    idle_timeout: int = 0,
     debug: bool = False,
 ) -> Optional[BBSEntry]:
     """
@@ -184,9 +191,12 @@ def display_external_menu(
             has_next=(page < total_pages - 1),
             has_prev=(page > 0),
             has_clear=bool(search_query),
+            idle_timeout=idle_timeout,
             debug=debug
         )
 
+        if result is None:
+            return None  # Timed out
         if result == "next":
             page += 1
         elif result == "prev":
@@ -220,8 +230,9 @@ def get_external_selection(
     has_next: bool = False,
     has_prev: bool = False,
     has_clear: bool = False,
+    idle_timeout: int = 0,
     debug: bool = False,
-) -> Union[BBSEntry, str]:
+) -> Union[BBSEntry, str, None]:
     """
     Get user selection from external BBS page.
 
@@ -232,16 +243,21 @@ def get_external_selection(
         has_next: Whether next page exists.
         has_prev: Whether previous page exists.
         has_clear: Whether search can be cleared.
+        idle_timeout: Seconds of inactivity before auto-disconnect (0 = disabled).
         debug: Enable debug logging.
 
     Returns:
-        BBSEntry, or command string ("next", "prev", "search", "clear", "back").
+        BBSEntry, command string ("next", "prev", "search", "clear", "back"), or None if timed out.
     """
     max_choice = len(page_entries)
+    timeout = idle_timeout if idle_timeout else None
 
     while True:
         color_print(ser, "Selection: ", Color.CYAN, term_type, debug=debug)
-        ch = modem_getch(ser, debug=debug)
+        ch = modem_getch(ser, timeout=timeout, debug=debug)
+        if ch is None:
+            logger.info("External menu selection timed out due to inactivity")
+            return None
         ch_str = ch.decode(errors="ignore").upper()
 
         # Navigation commands

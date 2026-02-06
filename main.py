@@ -43,6 +43,7 @@ def menu_loop(ser, config, gc, external_bbs_list, term_type, local_mode=False):
             config.bbs_entries,
             term_type,
             has_external=len(external_bbs_list) > 0,
+            idle_timeout=gc.idle_timeout,
             debug=gc.debug_modem,
         )
 
@@ -57,6 +58,7 @@ def menu_loop(ser, config, gc, external_bbs_list, term_type, local_mode=False):
                 ser,
                 external_bbs_list,
                 term_type,
+                idle_timeout=gc.idle_timeout,
                 debug=gc.debug_modem,
             )
             if ext_selection is None:
