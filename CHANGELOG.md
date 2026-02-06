@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-02-06
+
+### Added
+- External BBS list support with search and browsing from syncterm.lst
+- SSH and rlogin protocol support alongside telnet
+- Password masking with `*` characters on SSH login
+- Anonymous SSH connections (press Enter at username to skip credentials)
+- Retry prompt on SSH authentication failure instead of disconnecting
+- Character echo for modem input fields
+
+### Fixed
+- Search prompt now echoes input and shows instructions
+- Empty username no longer blocks SSH connection flow
+- SSH auth failure returns to menu instead of hanging up
+
 ## [2.0.0] - 2026-02-05
 
 ### Added
@@ -29,5 +44,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic modem-to-telnet bridge functionality
 - Single BBS connection support
 
+[2.1.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.1.0
 [2.0.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.0.0
 [1.0.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v1.0.0
