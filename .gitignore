@@ -45,6 +45,7 @@ htmlcov/
 
 # Logs
 *.log
+syncterm_cache.lst
 
 # OS files
 .DS_Store
