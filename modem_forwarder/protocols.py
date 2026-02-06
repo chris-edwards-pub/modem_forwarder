@@ -122,7 +122,7 @@ def create_ssh_connection(
     modem_print(ser, f"SSH connection to {bbs.host}:{bbs.port}", debug=debug)
     modem_print(ser, "", debug=debug)
 
-    username = modem_input(ser, prompt="Username: ", debug=debug)
+    username = modem_input(ser, prompt="Username: ", allow_empty=True, debug=debug)
 
     if username:
         password = modem_input(ser, prompt="Password: ", mask_char="*", debug=debug)

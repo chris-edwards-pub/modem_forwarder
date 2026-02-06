@@ -27,7 +27,7 @@ def modem_print(ser: serial.Serial, text: str, debug: bool = False) -> None:
     ser.flush()
 
 
-def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = True, mask_char: Optional[str] = None, debug: bool = False) -> str:
+def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = True, mask_char: Optional[str] = None, allow_empty: bool = False, debug: bool = False) -> str:
     """
     Optionally send a prompt, then read and return a line of input from the modem.
 
@@ -36,6 +36,7 @@ def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = T
         prompt: Optional prompt to display before reading.
         echo: Echo characters back to the modem as they are typed.
         mask_char: If set, echo this character instead of the actual input (e.g. "*" for passwords).
+        allow_empty: If True, pressing Enter with no input returns an empty string.
         debug: Enable debug logging.
 
     Returns:
@@ -57,7 +58,7 @@ def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = T
             if debug:
                 logger.debug(f"Read byte: {ch!r}")
             if ch in (b'\r', b'\n'):
-                if buf:
+                if buf or allow_empty:
                     if echo:
                         ser.write(b"\r\n")
                         ser.flush()
