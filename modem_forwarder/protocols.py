@@ -123,11 +123,11 @@ def create_ssh_connection(
     modem_print(ser, "", debug=debug)
 
     username = modem_input(ser, prompt="Username: ", debug=debug)
-    if not username:
-        modem_print(ser, "Username required.", debug=debug)
-        return None
 
-    password = modem_input(ser, prompt="Password: ", debug=debug)
+    if username:
+        password = modem_input(ser, prompt="Password: ", mask_char="*", debug=debug)
+    else:
+        password = None
 
     try:
         if debug:
@@ -136,15 +136,19 @@ def create_ssh_connection(
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-        client.connect(
-            hostname=bbs.host,
-            port=bbs.port,
-            username=username,
-            password=password,
-            timeout=timeout,
-            look_for_keys=False,
-            allow_agent=False,
-        )
+        connect_kwargs = {
+            "hostname": bbs.host,
+            "port": bbs.port,
+            "timeout": timeout,
+            "look_for_keys": False,
+            "allow_agent": False,
+        }
+        if username:
+            connect_kwargs["username"] = username
+        if password:
+            connect_kwargs["password"] = password
+
+        client.connect(**connect_kwargs)
 
         # Get interactive shell channel
         channel = client.invoke_shell(term="ansi", width=80, height=24)

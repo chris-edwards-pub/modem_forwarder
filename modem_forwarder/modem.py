@@ -27,7 +27,7 @@ def modem_print(ser: serial.Serial, text: str, debug: bool = False) -> None:
     ser.flush()
 
 
-def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = True, debug: bool = False) -> str:
+def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = True, mask_char: Optional[str] = None, debug: bool = False) -> str:
     """
     Optionally send a prompt, then read and return a line of input from the modem.
 
@@ -35,6 +35,7 @@ def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = T
         ser: Serial port object.
         prompt: Optional prompt to display before reading.
         echo: Echo characters back to the modem as they are typed.
+        mask_char: If set, echo this character instead of the actual input (e.g. "*" for passwords).
         debug: Enable debug logging.
 
     Returns:
@@ -73,7 +74,7 @@ def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = T
                 continue
             buf += ch
             if echo:
-                ser.write(ch)
+                ser.write(mask_char.encode() if mask_char else ch)
                 ser.flush()
         else:
             time.sleep(0.05)
