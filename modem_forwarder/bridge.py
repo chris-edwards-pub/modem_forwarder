@@ -1,14 +1,14 @@
-"""Telnet bridge session handling."""
+"""Bridge session handling for telnet, SSH, and rlogin."""
 
 import logging
 import selectors
-import socket
 
 import serial
 
 from .autologin import execute_autologin
 from .config import BBSEntry, GlobalConfig
 from .modem import force_hangup, modem_print
+from .protocols import create_connection
 
 logger = logging.getLogger(__name__)
 
@@ -19,23 +19,23 @@ def bridge_session(
     config: GlobalConfig,
 ) -> None:
     """
-    Bridge modem to BBS via telnet.
+    Bridge modem to BBS via telnet, SSH, or rlogin.
 
     Args:
         ser: Serial port object.
-        bbs: BBS configuration (host, port, auto_login, etc.).
+        bbs: BBS configuration (host, port, protocol, auto_login, etc.).
         config: Global settings (chunk sizes, debug flag).
     """
-    logger.info(f"Connecting to {bbs.name} at {bbs.host}:{bbs.port}...")
+    protocol = getattr(bbs, 'protocol', 'telnet')
+    logger.info(f"Connecting to {bbs.name} at {bbs.host}:{bbs.port} via {protocol}...")
 
-    try:
-        sock = socket.create_connection((bbs.host, bbs.port), timeout=10)
-    except Exception as e:
-        logger.error(f"Could not connect to {bbs.name}: {e}")
-        modem_print(ser, f"Connection failed: {e}", debug=config.debug_modem)
+    sock = create_connection(bbs, ser, debug=config.debug_modem, timeout=10)
+    if sock is None:
+        logger.error(f"Could not connect to {bbs.name}")
+        modem_print(ser, "Connection failed.", debug=config.debug_modem)
         return
 
-    logger.info(f"Connected to {bbs.name}")
+    logger.info(f"Connected to {bbs.name} via {protocol}")
 
     # Execute auto-login if configured
     if bbs.auto_login:
@@ -53,7 +53,7 @@ def bridge_session(
     sel.register(ser, selectors.EVENT_READ, data="modem")
     sel.register(sock, selectors.EVENT_READ, data="bbs")
 
-    logger.info("Telnet connected. Entering bridge loop...")
+    logger.info("Connection established. Entering bridge loop...")
 
     try:
         while True:

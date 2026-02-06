@@ -24,6 +24,7 @@ class BBSEntry:
     host: str
     port: int
     description: str = ""
+    protocol: str = "telnet"  # "telnet", "ssh", "rlogin"
     auto_login: Optional[List[AutoLoginStep]] = None
 
 
@@ -43,6 +44,8 @@ class GlobalConfig:
     init_sequence: List[str] = field(default_factory=lambda: [
         "ATZ", "AT&D0", "AT&C0", "ATV1", "ATS0=1"
     ])
+    external_bbs_url: str = "https://syncterm.bbsdev.net/syncterm.lst"
+    external_bbs_cache: str = "syncterm_cache.lst"
 
 
 @dataclass
@@ -72,6 +75,7 @@ def _parse_bbs_entry(data: dict) -> BBSEntry:
         host=data["host"],
         port=data["port"],
         description=data.get("description", ""),
+        protocol=data.get("protocol", "telnet"),
         auto_login=_parse_auto_login(data.get("auto_login")),
     )
 
@@ -90,6 +94,8 @@ def _parse_global_config(data: dict) -> GlobalConfig:
         log_file=data.get("log_file", "modem_forwarder.log"),
         log_level=data.get("log_level", "INFO"),
         init_sequence=data.get("init_sequence", ["ATZ", "AT&D0", "AT&C0", "ATV1", "ATS0=1"]),
+        external_bbs_url=data.get("external_bbs_url", "https://syncterm.bbsdev.net/syncterm.lst"),
+        external_bbs_cache=data.get("external_bbs_cache", "syncterm_cache.lst"),
     )
 
 
