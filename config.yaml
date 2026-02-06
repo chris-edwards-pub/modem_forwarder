@@ -17,17 +17,23 @@ global:
     - "AT&C0"
     - "ATV1"
     - "ATS0=1"
+  # External BBS list settings
+  external_bbs_url: "https://syncterm.bbsdev.net/syncterm.lst"
+  external_bbs_cache: "syncterm_cache.lst"
 
 bbs_entries:
+  # Protocol options: telnet, ssh, rlogin
   - name: "The C64 Pub (PETSCII)"
     description: "Retro computing BBS that all about the Commodore 64"
     host: "bbs.c64.pub"
     port: 64
+    protocol: telnet
     auto_login: null
 
   - name: "The C64 Pub (ANSI/ASCII)"
     description: "Retro computing BBS "
     host: "bbs.c64.pub"
     port: 23
+    protocol: telnet
     auto_login: null
 
