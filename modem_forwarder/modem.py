@@ -27,7 +27,7 @@ def modem_print(ser: serial.Serial, text: str, debug: bool = False) -> None:
     ser.flush()
 
 
-def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = False, debug: bool = False) -> str:
+def modem_input(ser: serial.Serial, prompt: Optional[str] = None, echo: bool = True, debug: bool = False) -> str:
     """
     Optionally send a prompt, then read and return a line of input from the modem.
 
