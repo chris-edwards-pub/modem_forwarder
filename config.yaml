@@ -12,12 +12,16 @@ global:
   welcome_message: "Welcome to the BBS Gateway!"
   log_file: "modem_forwarder.log"
   log_level: "INFO"
+  # USR Courier init sequence
   init_sequence:
-    - "ATZ"
-    - "AT&D0"
-    - "AT&C0"
-    - "ATV1"
-    - "ATS0=1"
+    - "AT&F"       # Factory reset
+    - "ATE1"       # Command echo on
+    - "ATV1"       # Verbose result codes
+    - "ATQ0"       # Enable result codes
+    - "AT&C1"      # DCD follows carrier
+    - "AT&D2"      # Hang up on DTR drop
+    - "AT&K3"      # Hardware flow control (RTS/CTS)
+    - "ATS0=1"     # Auto-answer on first ring
   # External BBS list settings
   external_bbs_url: "https://syncterm.bbsdev.net/syncterm.lst"
   external_bbs_cache: "syncterm_cache.lst"

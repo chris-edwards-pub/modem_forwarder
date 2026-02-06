@@ -124,7 +124,8 @@ def main_loop(config_path: str = "config.yaml", local_mode: bool = False, debug:
                 timeout=gc.serial_timeout,
             ) as ser:
                 ser.dtr = True
-                ser.xonxoff = True
+                ser.rtscts = True   # Hardware flow control (RTS/CTS)
+                ser.xonxoff = False
 
                 # Ensure clean state before init
                 force_hangup(ser, debug=gc.debug_modem)
