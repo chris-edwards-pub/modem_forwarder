@@ -117,6 +117,10 @@ def force_hangup(ser: serial.Serial, debug: bool = False) -> None:
         ser: Serial port object.
         debug: Enable debug logging.
     """
+    if getattr(ser, 'is_local', False):
+        logger.debug("Skipping hangup in local mode")
+        return
+
     logger.info("Forcing hangup: DTR drop + escape + ATH")
     try:
         # Hard drop via DTR toggle
