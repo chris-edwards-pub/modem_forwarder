@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2026-02-06
+
+### Added
+- Local access mode (`--local`) for testing without a modem using stdin/stdout
+- `--debug` CLI flag to show log output on console in local mode
+- Configurable inactivity timeout (`idle_timeout`, default 5 minutes)
+- Timeout resets on any data flow in either direction (safe for Zmodem transfers)
+- Timeout applies to bridge sessions, menu prompts, and external BBS selection
+- CLI argument support via argparse (`--local`, `--debug`, `--config`)
+
 ## [2.1.0] - 2026-02-06
 
 ### Added
@@ -44,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic modem-to-telnet bridge functionality
 - Single BBS connection support
 
+[2.2.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.2.0
 [2.1.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.1.0
 [2.0.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.0.0
 [1.0.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v1.0.0
