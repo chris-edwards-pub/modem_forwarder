@@ -198,7 +198,21 @@ def init_modem(ser: serial.Serial, init_sequence: Optional[List[str]] = None, de
             logger.debug(f"Sending init command: {cmd_bytes!r}")
         ser.write(cmd_bytes)
         ser.flush()
-        time.sleep(1)
+        # Wait for response (up to 2 seconds)
+        deadline = time.time() + 2.0
+        resp = ""
+        while time.time() < deadline:
+            if ser.in_waiting:
+                chunk = ser.read(ser.in_waiting)
+                resp += chunk.decode(errors="ignore")
+                if "OK" in resp.upper() or "ERROR" in resp.upper():
+                    break
+            time.sleep(0.05)
+        resp_clean = resp.strip()
+        if resp_clean:
+            logger.info(f"  {cmd} -> {resp_clean!r}")
+        else:
+            logger.warning(f"  {cmd} -> no response")
 
 
 def wait_for_connect(ser: serial.Serial, debug: bool = False) -> str:
