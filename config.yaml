@@ -15,7 +15,7 @@ global:
   # USR Courier init sequence
   init_sequence:
     - "AT&F"       # Factory reset
-    - "ATE1"       # Command echo on
+    - "ATE0"       # Command echo off (prevent buffer pollution)
     - "ATV1"       # Verbose result codes
     - "ATQ0"       # Enable result codes
     - "AT&C1"      # DCD follows carrier

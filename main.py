@@ -16,7 +16,7 @@ from modem_forwarder.bridge import bridge_session
 from modem_forwarder.config import load_config
 from modem_forwarder.logging_config import setup_logging
 from modem_forwarder.menu import display_menu, get_selection, display_external_menu, EXTERNAL_MENU
-from modem_forwarder.modem import force_hangup, init_modem, wait_for_connect
+from modem_forwarder.modem import flush_input_buffer, force_hangup, init_modem, wait_for_connect
 from modem_forwarder.syncterm import download_syncterm_list
 from modem_forwarder.terminal import get_terminal_type, safe_print
 
@@ -130,6 +130,7 @@ def main_loop(config_path: str = "config.yaml", local_mode: bool = False, debug:
                 # Ensure clean state before init
                 force_hangup(ser, debug=gc.debug_modem)
                 init_modem(ser, init_sequence=gc.init_sequence, debug=gc.debug_modem)
+                flush_input_buffer(ser, debug=gc.debug_modem)
 
                 # Wait for incoming call
                 connect_string = wait_for_connect(ser, debug=gc.debug_modem)
