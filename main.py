@@ -33,19 +33,15 @@ def _get_version():
     except Exception:
         pass
     try:
-        import tomllib
-    except ImportError:
-        try:
-            import tomli as tomllib
-        except ImportError:
-            return "unknown"
-    try:
+        import re
         pyproject = Path(__file__).parent / "pyproject.toml"
-        with open(pyproject, "rb") as f:
-            data = tomllib.load(f)
-        return data["project"]["version"]
+        text = pyproject.read_text()
+        match = re.search(r'^version\s*=\s*"([^"]+)"', text, re.MULTILINE)
+        if match:
+            return match.group(1)
     except Exception:
-        return "unknown"
+        pass
+    return "unknown"
 
 
 __version__ = _get_version()
