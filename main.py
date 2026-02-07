@@ -7,9 +7,11 @@ A modem-to-telnet bridge with configurable BBS menu and auto-login support.
 
 import argparse
 import logging
+import signal
 import subprocess
 import sys
 import time
+from pathlib import Path
 
 import serial
 
@@ -23,11 +25,30 @@ from modem_forwarder.terminal import get_terminal_type, safe_print
 
 logger = logging.getLogger(__name__)
 
-try:
-    from importlib.metadata import version as pkg_version
-    __version__ = pkg_version("modem-forwarder")
-except Exception:
-    __version__ = "dev"
+def _get_version():
+    """Get version from importlib.metadata, falling back to pyproject.toml."""
+    try:
+        from importlib.metadata import version as pkg_version
+        return pkg_version("modem-forwarder")
+    except Exception:
+        pass
+    try:
+        import tomllib
+    except ImportError:
+        try:
+            import tomli as tomllib
+        except ImportError:
+            return "unknown"
+    try:
+        pyproject = Path(__file__).parent / "pyproject.toml"
+        with open(pyproject, "rb") as f:
+            data = tomllib.load(f)
+        return data["project"]["version"]
+    except Exception:
+        return "unknown"
+
+
+__version__ = _get_version()
 
 
 def _get_git_branch():
@@ -109,6 +130,12 @@ def main_loop(config_path: str = "config.yaml", local_mode: bool = False, debug:
         local_mode: If True, use local terminal instead of modem.
         debug: If True, show log output on console.
     """
+    # Handle SIGTERM (from systemd stop) the same as SIGINT
+    def _handle_sigterm(signum, frame):
+        raise KeyboardInterrupt
+
+    signal.signal(signal.SIGTERM, _handle_sigterm)
+
     # Load configuration
     config = load_config(config_path)
     gc = config.global_config
