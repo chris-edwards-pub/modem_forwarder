@@ -14,15 +14,8 @@ global:
   log_level: "INFO"
   # USR Courier init sequence
   init_sequence:
-    - "ATZ"        # Reset to stored profile
-    - "ATE0"       # Command echo off (prevent buffer pollution)
-    - "AT&B1"      # Fixed DTE rate (don't change serial speed on connect)
-    - "ATV1"       # Verbose result codes
-    - "ATQ0"       # Enable result codes
-    - "AT&C1"      # DCD follows carrier
-    - "AT&D2"      # Hang up on DTR drop
-    - "AT&K3"      # Hardware flow control (RTS/CTS)
-    - "ATS0=1"     # Auto-answer on first ring
+    - "ATZ"                              # Reset to stored profile
+    - "ATE0&B1V1Q0&C1&D2&K3S0=1"        # Echo off, fixed DTE, verbose, DCD, DTR, RTS/CTS, auto-answer
   # External BBS list settings
   external_bbs_url: "https://syncterm.bbsdev.net/syncterm.lst"
   external_bbs_cache: "syncterm_cache.lst"

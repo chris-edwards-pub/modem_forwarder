@@ -42,7 +42,7 @@ class GlobalConfig:
     log_target: str = "syslog"
     log_level: str = "INFO"
     init_sequence: List[str] = field(default_factory=lambda: [
-        "ATZ", "ATE0", "AT&B1", "ATV1", "ATQ0", "AT&C1", "AT&D2", "AT&K3", "ATS0=1"
+        "ATZ", "ATE0&B1V1Q0&C1&D2&K3S0=1"
     ])
     idle_timeout: int = 300  # seconds (0 = disabled)
     external_bbs_url: str = "https://syncterm.bbsdev.net/syncterm.lst"
@@ -94,7 +94,7 @@ def _parse_global_config(data: dict) -> GlobalConfig:
         welcome_message=data.get("welcome_message", "Welcome to the BBS Gateway!"),
         log_target=data.get("log_target", "syslog"),
         log_level=data.get("log_level", "INFO"),
-        init_sequence=data.get("init_sequence", ["ATZ", "ATE0", "AT&B1", "ATV1", "ATQ0", "AT&C1", "AT&D2", "AT&K3", "ATS0=1"]),
+        init_sequence=data.get("init_sequence", ["ATZ", "ATE0&B1V1Q0&C1&D2&K3S0=1"]),
         idle_timeout=data.get("idle_timeout", 300),
         external_bbs_url=data.get("external_bbs_url", "https://syncterm.bbsdev.net/syncterm.lst"),
         external_bbs_cache=data.get("external_bbs_cache", "syncterm_cache.lst"),
