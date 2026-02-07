@@ -7,6 +7,7 @@ A modem-to-telnet bridge with configurable BBS menu and auto-login support.
 
 import argparse
 import logging
+import subprocess
 import sys
 import time
 
@@ -21,6 +22,26 @@ from modem_forwarder.syncterm import download_syncterm_list
 from modem_forwarder.terminal import get_terminal_type, safe_print
 
 logger = logging.getLogger(__name__)
+
+try:
+    from importlib.metadata import version as pkg_version
+    __version__ = pkg_version("modem-forwarder")
+except Exception:
+    __version__ = "dev"
+
+
+def _get_git_branch():
+    """Return the current git branch name, or None if not in a git repo."""
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+            capture_output=True, text=True, timeout=5,
+        )
+        if result.returncode == 0:
+            return result.stdout.strip()
+    except Exception:
+        pass
+    return None
 
 
 def menu_loop(ser, config, gc, external_bbs_list, term_type, local_mode=False):
@@ -96,7 +117,12 @@ def main_loop(config_path: str = "config.yaml", local_mode: bool = False, debug:
     show_console = not local_mode or debug
     setup_logging(log_file=gc.log_file, level=gc.log_level, console=show_console)
 
-    logger.info("Modem Forwarder starting...")
+    branch = _get_git_branch()
+    version_str = f"v{__version__}"
+    if branch and branch != "master":
+        version_str += f" ({branch})"
+    logger.info(f"Modem Forwarder {version_str} starting...")
+    logger.info(f"Baud rate: {gc.default_baudrate}")
     logger.info(f"Loaded {len(config.bbs_entries)} BBS entries")
 
     # Load external BBS list
@@ -113,7 +139,7 @@ def main_loop(config_path: str = "config.yaml", local_mode: bool = False, debug:
                 logger.info(f"Terminal type: {term_type.value}")
                 menu_loop(ser, config, gc, external_bbs_list, term_type, local_mode=True)
         except KeyboardInterrupt:
-            logger.info("Interrupted, exiting.")
+            logger.info("Modem Forwarder shutting down.")
         return
 
     while True:
@@ -150,7 +176,7 @@ def main_loop(config_path: str = "config.yaml", local_mode: bool = False, debug:
             logger.error(f"Serial error: {e}")
             time.sleep(5)
         except KeyboardInterrupt:
-            logger.info("Interrupted, exiting.")
+            logger.info("Modem Forwarder shutting down.")
             sys.exit(0)
 
 
