@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-02-07
+
+### Added
+- systemd service file (`modem-forwarder.service`) for daemonized operation
+- GitHub Actions CI/CD pipeline (test on push/PR, deploy to RPi on master)
+- CLI entry point (`modem-forwarder` command) now properly handles argparse
+- Added `paramiko` to pyproject.toml dependencies
+
+### Changed
+- Default modem init sequence uses ATZ (stored profile) instead of AT&F (factory reset)
+- USR Courier modem compatibility: fixed DTE rate with AT&B1, disabled host-side flow control
+
 ## [2.2.0] - 2026-02-06
 
 ### Added
@@ -54,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic modem-to-telnet bridge functionality
 - Single BBS connection support
 
+[2.3.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.3.0
 [2.2.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.2.0
 [2.1.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.1.0
 [2.0.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.0.0
