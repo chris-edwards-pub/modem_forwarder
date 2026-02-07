@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2026-02-07
+
+### Added
+- Version, git branch, and baud rate displayed in startup log
+- Shutdown log entry on SIGTERM (systemd stop) and SIGINT
+- Manual workflow dispatch for deploying any branch via GitHub Actions UI
+
+### Changed
+- Default DTE baud rate to 115200 for USR Courier
+- Logging defaults to syslog (`log_target: "syslog"`) with standard format (`program[PID]: message`)
+- Replaced `log_file` config key with `log_target` ("syslog" or a file path)
+- Console log output now only enabled with `--debug` flag (no more journald duplication)
+- CI runner Python version set to 3.9 to match Raspberry Pi deployment target
+
+### Fixed
+- Version display on Python 3.9 (reads pyproject.toml with regex instead of tomllib)
+
 ## [2.3.0] - 2026-02-07
 
 ### Added
@@ -66,6 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic modem-to-telnet bridge functionality
 - Single BBS connection support
 
+[2.4.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.4.0
 [2.3.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.3.0
 [2.2.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.2.0
 [2.1.0]: https://github.com/chris-edwards-pub/modem_forwarder/releases/tag/v2.1.0
