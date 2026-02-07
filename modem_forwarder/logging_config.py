@@ -26,10 +26,11 @@ def setup_logging(log_target: str = "syslog", level: str = "INFO", console: bool
     root_logger.handlers.clear()
 
     if log_target == "syslog":
-        syslog_handler = logging.handlers.SysLogHandler(address="/dev/log")
-        syslog_formatter = logging.Formatter(
-            "modem-forwarder: [%(levelname)s] %(name)s: %(message)s"
+        syslog_handler = logging.handlers.SysLogHandler(
+            address="/dev/log",
+            facility=logging.handlers.SysLogHandler.LOG_DAEMON,
         )
+        syslog_formatter = logging.Formatter("modem-forwarder[%(process)d]: %(message)s")
         syslog_handler.setLevel(log_level)
         syslog_handler.setFormatter(syslog_formatter)
         root_logger.addHandler(syslog_handler)
