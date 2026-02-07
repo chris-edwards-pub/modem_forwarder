@@ -2,7 +2,7 @@
 
 global:
   modem_port: "/dev/ttyUSB0"
-  default_baudrate: 9600
+  default_baudrate: 115200
   serial_timeout: 0
   modem_read_chunk: 1
   bbs_read_chunk: 1024
