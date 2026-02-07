@@ -68,6 +68,11 @@ def bridge_session(
                     return
                 continue
 
+            # Check for carrier loss (caller hung up)
+            if not getattr(ser, 'is_local', False) and not ser.cd:
+                logger.info("Carrier lost (caller disconnected). Ending session.")
+                return
+
             for key, mask in events:
                 source = key.data
 
