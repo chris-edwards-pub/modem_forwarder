@@ -5,6 +5,12 @@ on:
     branches: [master, "feature/*"]
   pull_request:
     branches: [master]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to deploy"
+        required: true
+        default: "master"
 
 jobs:
   test:
@@ -28,9 +34,20 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    if: >
+      (github.ref == 'refs/heads/master' && github.event_name == 'push') ||
+      github.event_name == 'workflow_dispatch'
 
     steps:
+      - name: Determine branch
+        id: branch
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "ref=${{ github.event.inputs.branch }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "ref=master" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Deploy to Raspberry Pi
         uses: appleboy/ssh-action@v1
         with:
@@ -41,7 +58,8 @@ jobs:
           script: |
             cd /home/chris/modem_forwarder
             git fetch origin
-            git reset --hard origin/master
+            git checkout ${{ steps.branch.outputs.ref }}
+            git reset --hard origin/${{ steps.branch.outputs.ref }}
             source .venv/bin/activate
             pip install -r requirements.txt --upgrade --quiet
             sudo systemctl restart modem-forwarder
