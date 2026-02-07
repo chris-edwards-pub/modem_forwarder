@@ -152,10 +152,15 @@ def main_loop(config_path: str = "config.yaml", local_mode: bool = False, debug:
             sys.exit(0)
 
 
-if __name__ == "__main__":
+def cli():
+    """CLI entry point for the modem-forwarder console script."""
     parser = argparse.ArgumentParser(description="Modem Forwarder - Multi-BBS Menu System")
     parser.add_argument("--local", action="store_true", help="Local mode: use terminal instead of modem")
     parser.add_argument("--debug", action="store_true", help="Show log output on console")
     parser.add_argument("--config", default="config.yaml", help="Path to configuration file")
     args = parser.parse_args()
     main_loop(config_path=args.config, local_mode=args.local, debug=args.debug)
+
+
+if __name__ == "__main__":
+    cli()
