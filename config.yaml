@@ -10,7 +10,7 @@ global:
   idle_timeout: 300  # seconds of inactivity before disconnect (0 = disabled)
   debug_modem: false
   welcome_message: "Welcome to the BBS Gateway!"
-  log_file: "modem_forwarder.log"
+  log_target: "syslog"  # "syslog" for system syslog, or a file path
   log_level: "INFO"
   # USR Courier init sequence
   init_sequence:

@@ -39,7 +39,7 @@ class GlobalConfig:
     hangup_read_timeout: float = 0.5
     debug_modem: bool = False
     welcome_message: str = "Welcome to the BBS Gateway!"
-    log_file: str = "modem_forwarder.log"
+    log_target: str = "syslog"
     log_level: str = "INFO"
     init_sequence: List[str] = field(default_factory=lambda: [
         "ATZ", "ATE0", "AT&B1", "ATV1", "ATQ0", "AT&C1", "AT&D2", "AT&K3", "ATS0=1"
@@ -92,7 +92,7 @@ def _parse_global_config(data: dict) -> GlobalConfig:
         hangup_read_timeout=data.get("hangup_read_timeout", 0.5),
         debug_modem=data.get("debug_modem", False),
         welcome_message=data.get("welcome_message", "Welcome to the BBS Gateway!"),
-        log_file=data.get("log_file", "modem_forwarder.log"),
+        log_target=data.get("log_target", "syslog"),
         log_level=data.get("log_level", "INFO"),
         init_sequence=data.get("init_sequence", ["ATZ", "ATE0", "AT&B1", "ATV1", "ATQ0", "AT&C1", "AT&D2", "AT&K3", "ATS0=1"]),
         idle_timeout=data.get("idle_timeout", 300),

@@ -136,9 +136,7 @@ def main_loop(config_path: str = "config.yaml", local_mode: bool = False, debug:
     config = load_config(config_path)
     gc = config.global_config
 
-    # In local mode, suppress console logging unless --debug is passed
-    show_console = not local_mode or debug
-    setup_logging(log_file=gc.log_file, level=gc.log_level, console=show_console)
+    setup_logging(log_target=gc.log_target, level=gc.log_level, console=debug)
 
     branch = _get_git_branch()
     version_str = f"v{__version__}"
