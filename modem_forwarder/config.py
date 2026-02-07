@@ -47,6 +47,10 @@ class GlobalConfig:
     idle_timeout: int = 300  # seconds (0 = disabled)
     external_bbs_url: str = "https://syncterm.bbsdev.net/syncterm.lst"
     external_bbs_cache: str = "syncterm_cache.lst"
+    call_log_db: str = "call_log.db"
+    grafana_cloud_url: str = ""
+    grafana_cloud_user: str = ""
+    grafana_cloud_api_key: str = ""
 
 
 @dataclass
@@ -98,6 +102,10 @@ def _parse_global_config(data: dict) -> GlobalConfig:
         idle_timeout=data.get("idle_timeout", 300),
         external_bbs_url=data.get("external_bbs_url", "https://syncterm.bbsdev.net/syncterm.lst"),
         external_bbs_cache=data.get("external_bbs_cache", "syncterm_cache.lst"),
+        call_log_db=data.get("call_log_db", "call_log.db"),
+        grafana_cloud_url=data.get("grafana_cloud_url", ""),
+        grafana_cloud_user=data.get("grafana_cloud_user", ""),
+        grafana_cloud_api_key=data.get("grafana_cloud_api_key", ""),
     )
 
 
