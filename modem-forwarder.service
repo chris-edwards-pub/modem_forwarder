@@ -1,0 +1,20 @@
+[Unit]
+Description=Modem Forwarder - BBS Menu Gateway
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=chris
+Group=dialout
+WorkingDirectory=/home/chris/modem_forwarder
+ExecStart=/home/chris/modem_forwarder/.venv/bin/python main.py --config /home/chris/modem_forwarder/config.yaml
+Restart=always
+RestartSec=10
+Environment="PYTHONUNBUFFERED=1"
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=modem-forwarder
+
+[Install]
+WantedBy=multi-user.target
