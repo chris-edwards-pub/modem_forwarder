@@ -11,8 +11,9 @@ from .terminal import TerminalType, safe_print, color_print, Color
 
 logger = logging.getLogger(__name__)
 
-# Special return value indicating user wants external BBS menu
+# Special return values for menu selections
 EXTERNAL_MENU = "external"
+STATS_MENU = "stats"
 
 
 def display_menu(
@@ -21,6 +22,7 @@ def display_menu(
     welcome_message: str,
     term_type: TerminalType,
     external_count: int = 0,
+    has_stats: bool = False,
     debug: bool = False,
 ) -> None:
     """
@@ -32,6 +34,7 @@ def display_menu(
         welcome_message: Welcome message to display.
         term_type: Terminal type for charset-safe output.
         external_count: Number of external BBSes available.
+        has_stats: Whether to show the statistics option.
         debug: Enable debug logging.
     """
     logger.info(f"Displaying menu with {len(bbs_entries)} BBS entries")
@@ -52,6 +55,9 @@ def display_menu(
     if external_count > 0:
         color_print(ser, f"X. External BBSes ({external_count}+)", Color.CYAN, term_type, debug=debug)
 
+    if has_stats:
+        color_print(ser, "S. Statistics", Color.CYAN, term_type, debug=debug)
+
     color_print(ser, "0. Hang up", Color.RED, term_type, debug=debug)
     safe_print(ser, "", term_type, debug=debug)
 
@@ -61,6 +67,7 @@ def get_selection(
     bbs_entries: List[BBSEntry],
     term_type: TerminalType,
     has_external: bool = False,
+    has_stats: bool = False,
     idle_timeout: int = 0,
     debug: bool = False,
 ) -> Union[BBSEntry, str, None]:
@@ -72,14 +79,17 @@ def get_selection(
         bbs_entries: List of available BBS entries.
         term_type: Terminal type for charset-safe output.
         has_external: Whether external BBS menu is available.
+        has_stats: Whether statistics option is available.
         idle_timeout: Seconds of inactivity before auto-disconnect (0 = disabled).
         debug: Enable debug logging.
 
     Returns:
-        Selected BBSEntry, EXTERNAL_MENU constant, or None if user chose to hang up.
+        Selected BBSEntry, EXTERNAL_MENU/STATS_MENU constant, or None if user chose to hang up.
     """
     max_choice = len(bbs_entries)
     prompt_extra = ", X for external" if has_external else ""
+    if has_stats:
+        prompt_extra += ", S for stats"
     timeout = idle_timeout if idle_timeout else None
 
     while True:
@@ -94,6 +104,11 @@ def get_selection(
         if has_external and ch_str == "X":
             logger.info("User selected external BBS menu")
             return EXTERNAL_MENU
+
+        # Check for stats menu
+        if has_stats and ch_str == "S":
+            logger.info("User selected statistics")
+            return STATS_MENU
 
         try:
             choice = int(ch_str)
@@ -308,3 +323,48 @@ def prompt_search_term(
     safe_print(ser, "", term_type, debug=debug)
     search = modem_input(ser, prompt="Search: ", echo=True, debug=debug)
     return search.strip()
+
+
+def display_stats(
+    ser: serial.Serial,
+    call_log,
+    term_type: TerminalType,
+    debug: bool = False,
+) -> None:
+    """
+    Display call statistics to the modem user.
+
+    Args:
+        ser: Serial port object.
+        call_log: CallLog instance to query stats from.
+        term_type: Terminal type for charset-safe output.
+        debug: Enable debug logging.
+    """
+    stats = call_log.get_stats()
+
+    safe_print(ser, "", term_type, debug=debug)
+    color_print(ser, "=== Call Statistics ===", Color.YELLOW, term_type, debug=debug)
+    safe_print(ser, "", term_type, debug=debug)
+
+    color_print(ser, f"Total calls: {stats['total_calls']}", Color.GREEN, term_type, debug=debug)
+    color_print(ser, f"Calls today: {stats['calls_today']}", Color.GREEN, term_type, debug=debug)
+
+    avg_mins = stats['avg_duration_secs'] // 60
+    avg_secs = stats['avg_duration_secs'] % 60
+    color_print(ser, f"Avg duration: {avg_mins}m {avg_secs}s", Color.GREEN, term_type, debug=debug)
+
+    if stats['top_baud_rate']:
+        color_print(ser, f"Most common baud: {stats['top_baud_rate']}", Color.GREEN, term_type, debug=debug)
+
+    if stats['top_terminal']:
+        color_print(ser, f"Most common terminal: {stats['top_terminal']}", Color.GREEN, term_type, debug=debug)
+
+    if stats['top_bbs']:
+        safe_print(ser, "", term_type, debug=debug)
+        color_print(ser, "Most popular BBSes:", Color.YELLOW, term_type, debug=debug)
+        for name, count in stats['top_bbs']:
+            color_print(ser, f"  {name}: {count} calls", Color.WHITE, term_type, debug=debug)
+
+    safe_print(ser, "", term_type, debug=debug)
+    color_print(ser, "Press any key to continue...", Color.CYAN, term_type, debug=debug)
+    modem_getch(ser, debug=debug)

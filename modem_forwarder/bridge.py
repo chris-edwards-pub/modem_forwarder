@@ -18,7 +18,7 @@ def bridge_session(
     ser: serial.Serial,
     bbs: BBSEntry,
     config: GlobalConfig,
-) -> None:
+):
     """
     Bridge modem to BBS via telnet, SSH, or rlogin.
 
@@ -26,6 +26,10 @@ def bridge_session(
         ser: Serial port object.
         bbs: BBS configuration (host, port, protocol, auto_login, etc.).
         config: Global settings (chunk sizes, debug flag).
+
+    Returns:
+        False if connection failed, or a disconnect reason string:
+        "carrier_loss", "idle_timeout", "bbs_closed", "error".
     """
     protocol = getattr(bbs, 'protocol', 'telnet')
     logger.info(f"Connecting to {bbs.name} at {bbs.host}:{bbs.port} via {protocol}...")
@@ -65,13 +69,13 @@ def bridge_session(
                 if idle_timeout and time.time() - last_activity > idle_timeout:
                     logger.warning(f"Session timed out after {idle_timeout}s of inactivity")
                     modem_print(ser, "\r\nSession timed out due to inactivity.", debug=config.debug_modem)
-                    return
+                    return "idle_timeout"
                 continue
 
             # Check for carrier loss (caller hung up)
             if not getattr(ser, 'is_local', False) and not ser.cd:
                 logger.info("Carrier lost (caller disconnected). Ending session.")
-                return
+                return "carrier_loss"
 
             for key, mask in events:
                 source = key.data
@@ -91,7 +95,7 @@ def bridge_session(
                             sock.sendall(data)
                         except Exception as e:
                             logger.error(f"Send to BBS failed: {e}")
-                            return
+                            return "error"
 
                 elif source == "bbs":
                     try:
@@ -111,11 +115,11 @@ def bridge_session(
                             ser.flush()
                         except Exception as e:
                             logger.error(f"Write to modem failed: {e}")
-                            return
+                            return "error"
                     elif data == b"":
                         # Remote side closed
                         logger.info("BBS closed connection. Ending session.")
-                        return
+                        return "bbs_closed"
 
     finally:
         try:

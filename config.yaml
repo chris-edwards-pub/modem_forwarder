@@ -19,6 +19,12 @@ global:
   # External BBS list settings
   external_bbs_url: "https://syncterm.bbsdev.net/syncterm.lst"
   external_bbs_cache: "syncterm_cache.lst"
+  # Call logging
+  call_log_db: "call_log.db"
+  # Grafana Cloud metrics (leave empty to disable)
+  grafana_cloud_url: ""
+  grafana_cloud_user: ""
+  grafana_cloud_api_key: ""
 
 bbs_entries:
   # Protocol options: telnet, ssh, rlogin
