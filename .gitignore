@@ -47,6 +47,9 @@ htmlcov/
 *.log
 syncterm_cache.lst
 
+# Database
+call_log.db
+
 # OS files
 .DS_Store
 Thumbs.db
