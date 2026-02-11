@@ -171,7 +171,7 @@ def main_loop(config_path: str = "config.yaml", local_mode: bool = False, debug:
                 timeout=gc.serial_timeout,
             ) as ser:
                 ser.dtr = True
-                ser.rtscts = False
+                ser.rtscts = True
                 ser.xonxoff = False
 
                 # Ensure clean state before init
